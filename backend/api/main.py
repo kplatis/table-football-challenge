@@ -3,16 +3,10 @@ Main application that initializes the table football challenge API
 """
 
 from fastapi import FastAPI
+from api.users import routers as user_routers
+
 
 app = FastAPI()
 
 
-@app.get("")
-def read_root():
-    """
-    Handle GET requests to the root endpoint ("/").
-
-    Returns:
-        dict: A dictionary containing a simple greeting message.
-    """
-    return {"Hello": "World"}
+app.include_router(user_routers, prefix="/users")

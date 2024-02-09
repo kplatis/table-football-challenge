@@ -17,6 +17,14 @@ class Team(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, unique=True, index=True)
     first_player_id = Column(Integer, ForeignKey("users.id"))
-    first_player = relationship("User", back_populates="teams")
+    first_player = relationship(
+        "api.users.models.User",
+        back_populates="first_player_teams",
+        foreign_keys=[first_player_id],
+    )
     second_player_id = Column(Integer, ForeignKey("users.id"), nullable=True)
-    second_player = relationship("User", back_populates="teams")
+    second_player = relationship(
+        "api.users.models.User",
+        back_populates="second_player_teams",
+        foreign_keys=[second_player_id],
+    )

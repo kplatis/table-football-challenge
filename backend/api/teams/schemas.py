@@ -28,3 +28,19 @@ class TeamCreate(TeamBase):
         """
 
         orm_mode = True
+
+
+class Team(TeamBase):
+    """
+    Schema declaration for team creation
+    """
+
+    first_player_id: int
+    second_player_id: Optional[int]
+
+    class Config:
+        """
+        Configuration of schema
+        """
+
+        orm_mode = True

@@ -20,3 +20,10 @@ def create_team(db: Session, team: schemas.TeamCreate):
     db.commit()
     db.refresh(db_team)
     return db_team
+
+
+def get_teams(db: Session):
+    """
+    CRUD action to read all teams
+    """
+    return db.query(models.Team).all()

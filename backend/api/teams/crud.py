@@ -10,8 +10,8 @@ def create_team(db: Session, team: schemas.TeamCreate):
     """
     CRUD action to create a new team
     """
-    # TODO: Add case where first_player_id == second_player_id
-    # TODO: Add case where players do not exist
+    # TODO_: Add case where first_player_id == second_player_id
+    # TODO_: Add case where players do not exist
     db_team = models.Team(
         name=team.name,
         first_player_id=team.first_player_id,

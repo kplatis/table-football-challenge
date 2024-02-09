@@ -1,0 +1,2 @@
+[tool.pylint.messages_control]
+disable = ["unnecessary-pass", "too-few-public-methods"]

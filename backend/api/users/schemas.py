@@ -21,7 +21,7 @@ class UserCreate(UserBase):
     pass
 
 
-class User(BaseModel):
+class User(UserBase):
     """
     Schema declaration for User
     """

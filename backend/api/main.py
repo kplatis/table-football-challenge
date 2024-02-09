@@ -7,6 +7,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+@app.get("")
 def read_root():
     """
     Handle GET requests to the root endpoint ("/").

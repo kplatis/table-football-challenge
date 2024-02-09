@@ -1,3 +1,10 @@
 
 
+## VSCODE
+
+.vscode/*
+
+## BACKEND
+
 **/.venv/*
+**/__pycache__/*

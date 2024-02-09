@@ -20,14 +20,14 @@ class TeamCreate(TeamBase):
     """
 
     first_player_id: int
-    second_player_id: Optional[int]
+    second_player_id: Optional[int] = None
 
     class Config:
         """
         Configuration of schema
         """
 
-        orm_mode = True
+        from_attributes = True
 
 
 class Team(TeamBase):
@@ -43,4 +43,4 @@ class Team(TeamBase):
         Configuration of schema
         """
 
-        orm_mode = True
+        from_attributes = True

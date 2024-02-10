@@ -5,7 +5,7 @@ CRUD definitions for Team module
 from sqlalchemy.orm import Session
 from api.exceptions import PlayerDoesNotExistException, SamePlayersTeamException
 from api.teams import models as teams_models, schemas as teams_schemas
-from api.users import models as users_models
+from api.players import models as players_models
 
 
 def create_team(db: Session, team: teams_schemas.TeamCreate):
@@ -14,12 +14,12 @@ def create_team(db: Session, team: teams_schemas.TeamCreate):
     """
 
     # checking if first player exists or not
-    first_player = db.query(users_models.User).get(team.first_player_id)
+    first_player = db.query(players_models.Player).get(team.first_player_id)
     if not first_player:
         raise PlayerDoesNotExistException
     # checking if second player exists or not
     if team.second_player_id is not None:
-        second_player = db.query(users_models.User).get(team.second_player_id)
+        second_player = db.query(players_models.Player).get(team.second_player_id)
         if not second_player:
             raise PlayerDoesNotExistException
     # checking if first and second player are the same

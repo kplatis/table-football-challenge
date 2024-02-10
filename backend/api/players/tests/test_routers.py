@@ -20,7 +20,7 @@ engine = create_engine(
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="class", name="test_application")
 def test_app():
     """
     Setup a test app
@@ -32,19 +32,21 @@ def test_app():
 
 
 @pytest.fixture(scope="class")
-def test_client(test_app):
+def test_client(test_application):
     """
     Setup a test client
     """
+    # pylint: disable=unused-argument
     with TestClient(test_app) as client:
         yield client
 
 
-@pytest.fixture(scope="class")
-def test_db(test_app):
+@pytest.fixture(scope="class", name="test_database")
+def test_db(test_application):
     """
     Setup a test database with players
     """
+    # pylint: disable=unused-argument
     with TestingSessionLocal() as db:
         players_data = [
             {"name": "Player 1"},
@@ -84,10 +86,11 @@ class TestPlayerRouters:
         """
         cls.client = TestClient(app)
 
-    def test_player_creation(self, test_db):
+    def test_player_creation(self, test_database):
         """
         Tests router POST /players
         """
+        # pylint: disable=unused-argument
         response = self.client.post(
             "/players/",
             json={"name": "Test Name"},
@@ -97,10 +100,11 @@ class TestPlayerRouters:
         assert data["name"] == "Test Name"
         assert "id" in data
 
-    def test_players_listing(self, test_db):
+    def test_players_listing(self, test_database):
         """
         Tests router GET /players
         """
+        # pylint: disable=unused-argument
         response = self.client.get("/players/")
         assert response.status_code == 200, response.text
         data = response.json()

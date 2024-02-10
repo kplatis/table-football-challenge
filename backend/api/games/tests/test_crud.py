@@ -5,8 +5,6 @@ Test module for Player CRUD actions
 from fastapi.testclient import TestClient
 import pytest
 from api.exceptions import (
-    PlayerDoesNotExistException,
-    SamePlayersTeamException,
     SameTeamsGameException,
     TeamDoesNotExistException,
 )
@@ -14,9 +12,6 @@ from api.games.crud import create_game, list_games
 from api.games.models import Game
 from api.games.schemas import GameCreate
 from api.main import app
-from api.teams.crud import create_team, get_teams
-from api.teams.models import Team
-from api.teams.schemas import TeamCreate
 
 
 class TestGameCrud:
@@ -52,7 +47,7 @@ class TestGameCrud:
 
     def test_game_creation_throws_exception_if_same_team_id(self, test_database):
         """
-        Tests whether the team creation throws exception when first and second player have the same ID
+        Tests whether the game creation throws exception when first and second player have the same ID
         """
         game_data = GameCreate(first_team_id=1, second_team_id=1)
         with pytest.raises(SameTeamsGameException):

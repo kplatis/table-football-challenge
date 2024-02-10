@@ -17,3 +17,11 @@ class SamePlayersTeamException(Exception):
     """
 
     pass
+
+
+class TeamDoesNotExistException(Exception):
+    """
+    Exception thrown when a team does not exist
+    """
+
+    pass

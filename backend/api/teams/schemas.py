@@ -3,7 +3,7 @@ Schema declaration for Teams module
 """
 
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class TeamBase(BaseModel):
@@ -21,13 +21,7 @@ class TeamCreate(TeamBase):
 
     first_player_id: int
     second_player_id: Optional[int] = None
-
-    class Config:
-        """
-        Configuration of schema
-        """
-
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class Team(TeamBase):
@@ -35,12 +29,7 @@ class Team(TeamBase):
     Schema declaration for team creation
     """
 
+    id: int
     first_player_id: int
     second_player_id: Optional[int]
-
-    class Config:
-        """
-        Configuration of schema
-        """
-
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

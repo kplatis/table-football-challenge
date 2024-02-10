@@ -14,12 +14,12 @@ def create_team(db: Session, team: teams_schemas.TeamCreate):
     """
 
     # checking if first player exists or not
-    first_player = db.query(players_models.Player).get(team.first_player_id)
+    first_player = db.get(players_models.Player, team.first_player_id)
     if not first_player:
         raise PlayerDoesNotExistException
     # checking if second player exists or not
     if team.second_player_id is not None:
-        second_player = db.query(players_models.Player).get(team.second_player_id)
+        second_player = db.get(players_models.Player, team.second_player_id)
         if not second_player:
             raise PlayerDoesNotExistException
     # checking if first and second player are the same

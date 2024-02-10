@@ -29,6 +29,7 @@ class Team(TeamBase):
     Schema declaration for team creation
     """
 
+    id: int
     first_player_id: int
     second_player_id: Optional[int]
     model_config = ConfigDict(from_attributes=True)

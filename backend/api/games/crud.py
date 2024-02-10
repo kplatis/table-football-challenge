@@ -70,7 +70,6 @@ def retrieve_game(db: Session, game_id: int):
     CRUD action to get single game
     """
     game = db.get(game_models.Game, game_id)
-    if game:
-        return game
-    else:
+    if not game:
         raise GameDoesNotExistException
+    return game

@@ -19,9 +19,12 @@ def create_game(db: Session, team: schemas.GameCreate):
     if not first_team or not second_team:
         raise TeamDoesNotExistException
 
-    # create team object
+    # create game object
     db_game = game_models.Game(
-        first_team_id=team.first_team_id, second_team_id=team.second_team_id
+        first_team_id=team.first_team_id,
+        second_team_id=team.second_team_id,
+        first_team_goals=team.first_team_goals,
+        second_team_goals=team.second_team_goals,
     )
     # add the object in the db and refresh
     db.add(db_game)

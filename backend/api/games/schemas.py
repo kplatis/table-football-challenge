@@ -2,6 +2,7 @@
 Schemas definition for Games module
 """
 
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -12,6 +13,8 @@ class GameBase(BaseModel):
 
     first_team_id: int
     second_team_id: int
+    first_team_goals: Optional[int] = None
+    second_team_goals: Optional[int] = None
 
 
 class GameCreate(GameBase):

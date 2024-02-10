@@ -5,12 +5,13 @@ Test module for Player CRUD actions
 from fastapi.testclient import TestClient
 import pytest
 from api.exceptions import (
+    GameDoesNotExistException,
     SameTeamsGameException,
     TeamDoesNotExistException,
 )
-from api.games.crud import create_game, list_games
+from api.games.crud import create_game, list_games, partial_update_game
 from api.games.models import Game
-from api.games.schemas import GameCreate
+from api.games.schemas import GameCreate, GamePartialUpdate
 from api.main import app
 
 
@@ -82,3 +83,22 @@ class TestGameCrud:
 
         games = list_games(db=test_database)
         assert len(games) == 2
+
+    def test_game_patching_successfully_updates_the_game(self, test_database):
+        """
+        Tests whether a game is correctly updated
+        """
+
+        game_data = GamePartialUpdate(first_team_goals=2, second_team_goals=1)
+        updated_game = partial_update_game(db=test_database, game_id=1, game=game_data)
+        assert updated_game.first_team_goals == 2
+        assert updated_game.second_team_goals == 1
+
+    def test_game_patching_raises_exception_if_game_does_not_exist(self, test_database):
+        """
+        Tests whether a game patching correctly raises exception if game does not exist
+        """
+
+        game_data = GamePartialUpdate(first_team_goals=2, second_team_goals=1)
+        with pytest.raises(GameDoesNotExistException):
+            partial_update_game(db=test_database, game_id=999, game=game_data)

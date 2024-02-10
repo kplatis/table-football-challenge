@@ -6,7 +6,11 @@ from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from api.dependencies import get_db
-from api.exceptions import SameTeamsGameException, TeamDoesNotExistException
+from api.exceptions import (
+    GameDoesNotExistException,
+    SameTeamsGameException,
+    TeamDoesNotExistException,
+)
 from api.games import schemas, crud
 
 router = APIRouter()
@@ -36,3 +40,27 @@ async def list_all_games(db: Session = Depends(get_db)):
     """
 
     return crud.list_games(db)
+
+
+@router.patch("/{game_id}", tags=["Games"], response_model=schemas.Game)
+async def patch_game(
+    game_id: int, game: schemas.GamePartialUpdate, db: Session = Depends(get_db)
+):
+    """
+    Defines endpoint to list all games
+    """
+    try:
+        return crud.partial_update_game(db, game_id, game)
+    except GameDoesNotExistException as exc:
+        raise HTTPException(status_code=404, detail="Game does not exist") from exc
+
+
+@router.get("/{game_id}", tags=["Games"], response_model=schemas.Game)
+async def get_game(game_id: int, db: Session = Depends(get_db)):
+    """
+    Defines endpoint to retrieve a single game
+    """
+    try:
+        return crud.retrieve_game(db, game_id)
+    except GameDoesNotExistException as exc:
+        raise HTTPException(status_code=404, detail="Game does not exist") from exc

@@ -11,8 +11,6 @@ class GameBase(BaseModel):
     Base schema definition for Game
     """
 
-    first_team_id: int
-    second_team_id: int
     first_team_goals: Optional[int] = None
     second_team_goals: Optional[int] = None
 
@@ -22,7 +20,8 @@ class GameCreate(GameBase):
     Schema definition for game creation
     """
 
-    pass
+    first_team_id: int
+    second_team_id: int
 
 
 class Game(GameBase):
@@ -31,3 +30,13 @@ class Game(GameBase):
     """
 
     id: int
+    first_team_id: int
+    second_team_id: int
+
+
+class GamePartialUpdate(GameBase):
+    """
+    Schema definition for game update
+    """
+
+    pass

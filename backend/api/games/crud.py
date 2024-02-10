@@ -3,7 +3,11 @@ CRUD definition for Game module
 """
 
 from sqlalchemy.orm import Session
-from api.exceptions import SameTeamsGameException, TeamDoesNotExistException
+from api.exceptions import (
+    GameDoesNotExistException,
+    SameTeamsGameException,
+    TeamDoesNotExistException,
+)
 from api.games import schemas, models as game_models
 from api.teams import models as teams_models
 
@@ -40,3 +44,32 @@ def list_games(db: Session):
     CRUD action to list all games
     """
     return db.query(game_models.Game).all()
+
+
+def partial_update_game(db: Session, game_id: int, game: schemas.GamePartialUpdate):
+    """
+    CRUD action to patch a game object
+    """
+    db_game = db.get(game_models.Game, game_id)
+    if not db_game:
+        raise GameDoesNotExistException
+    if game.first_team_goals:
+        db_game.first_team_goals = game.first_team_goals
+    if game.second_team_goals:
+        db_game.second_team_goals = game.second_team_goals
+
+    # Commit changes to the database
+    db.commit()
+    # Refresh the game object
+    db.refresh(db_game)
+    return db_game
+
+
+def retrieve_game(db: Session, game_id: int):
+    """
+    CRUD action to get single game
+    """
+    game = db.get(game_models.Game, game_id)
+    if not game:
+        raise GameDoesNotExistException
+    return game

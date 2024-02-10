@@ -33,3 +33,11 @@ class SameTeamsGameException(Exception):
     """
 
     pass
+
+
+class GameDoesNotExistException(Exception):
+    """
+    Exception thrown when a game does not exist
+    """
+
+    pass

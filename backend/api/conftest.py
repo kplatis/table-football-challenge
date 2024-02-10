@@ -11,6 +11,8 @@ from api.dependencies import get_db
 from api.main import app
 from api.players.crud import create_player
 from api.players.models import Player
+from api.teams.crud import create_team
+from api.teams.models import Team
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
@@ -56,6 +58,13 @@ def test_database(test_app):
         ]
         for player_data in players_data:
             create_player(db, Player(**player_data))
+        teams_data = [
+            {"name": "team1", "first_player_id": 1},
+            {"name": "team2", "first_player_id": 2},
+        ]
+        for team_data in teams_data:
+            create_team(db, Team(**team_data))
+
         db.commit()
     yield TestingSessionLocal()
     Base.metadata.drop_all(bind=engine)

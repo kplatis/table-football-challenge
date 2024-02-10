@@ -17,3 +17,19 @@ class SamePlayersTeamException(Exception):
     """
 
     pass
+
+
+class TeamDoesNotExistException(Exception):
+    """
+    Exception thrown when a team does not exist
+    """
+
+    pass
+
+
+class SameTeamsGameException(Exception):
+    """
+    Exception thrown when a games with the same teams is created
+    """
+
+    pass

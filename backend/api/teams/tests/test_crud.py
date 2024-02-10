@@ -1,5 +1,5 @@
 """
-Test module for Player routers
+Test module for Player CRUD actions
 """
 
 from fastapi.testclient import TestClient
@@ -71,4 +71,4 @@ class TestTeamCrud:
         """
 
         teams = get_teams(db=test_database)
-        assert len(teams) == 1
+        assert len(teams) == 3

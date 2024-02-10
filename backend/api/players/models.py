@@ -1,5 +1,5 @@
 """
-Model declaration for users module
+Model declaration for players module
 """
 
 from sqlalchemy.orm import relationship
@@ -8,12 +8,12 @@ from api.database import Base
 from api.teams.models import Team
 
 
-class User(Base):
+class Player(Base):
     """
-    SQLAlchemy model defining the user model
+    SQLAlchemy model defining the player model
     """
 
-    __tablename__ = "users"
+    __tablename__ = "players"
     __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True)

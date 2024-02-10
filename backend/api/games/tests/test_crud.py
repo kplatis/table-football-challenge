@@ -9,7 +9,7 @@ from api.exceptions import (
     SameTeamsGameException,
     TeamDoesNotExistException,
 )
-from api.games.crud import create_game, list_games, partial_update_game
+from api.games.crud import create_game, retrieve_game, list_games, partial_update_game
 from api.games.models import Game
 from api.games.schemas import GameCreate, GamePartialUpdate
 from api.main import app
@@ -102,3 +102,18 @@ class TestGameCrud:
         game_data = GamePartialUpdate(first_team_goals=2, second_team_goals=1)
         with pytest.raises(GameDoesNotExistException):
             partial_update_game(db=test_database, game_id=999, game=game_data)
+
+    def test_single_game_retrieval_returns_correct_game(self, test_database):
+        """
+        Tests whether a game retrieval finds the correct game
+        """
+
+        game = retrieve_game(db=test_database, game_id=1)
+        assert game.id == 1
+
+    def test_single_game_retrieval_raises_exception_if_not_exist(self, test_database):
+        """
+        Tests whether a game retrieval correctly raises exception if game does not exist
+        """
+        with pytest.raises(GameDoesNotExistException):
+            retrieve_game(db=test_database, game_id=999)

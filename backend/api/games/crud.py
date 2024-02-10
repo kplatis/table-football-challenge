@@ -63,3 +63,14 @@ def partial_update_game(db: Session, game_id: int, game: schemas.GamePartialUpda
     # Refresh the game object
     db.refresh(db_game)
     return db_game
+
+
+def retrieve_game(db: Session, game_id: int):
+    """
+    CRUD action to get single game
+    """
+    game = db.get(game_models.Game, game_id)
+    if game:
+        return game
+    else:
+        raise GameDoesNotExistException

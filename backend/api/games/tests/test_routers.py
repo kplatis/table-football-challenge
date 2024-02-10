@@ -106,3 +106,25 @@ class TestGamesRouters:
             json={"first_team_goals": 2, "second_team_goals": 1},
         )
         assert response.status_code == 404
+
+    def test_game_retrieval_returns_game(self, test_database):
+        """
+        Tests router GET /games/<ID>
+        """
+        # pylint: disable=unused-argument
+        response = self.client.get(
+            "/games/1",
+        )
+        assert response.status_code == 200
+        team = response.json()
+        assert team["id"] == 1
+
+    def test_game_retrieval_returns_404_if_game_does_not_exist(self, test_database):
+        """
+        Tests router GET /games/<ID> throws 404
+        """
+        # pylint: disable=unused-argument
+        response = self.client.get(
+            "/games/999",
+        )
+        assert response.status_code == 404

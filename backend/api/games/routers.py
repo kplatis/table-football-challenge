@@ -53,3 +53,14 @@ async def patch_game(
         return crud.partial_update_game(db, game_id, game)
     except GameDoesNotExistException as exc:
         raise HTTPException(status_code=404, detail="Game does not exist") from exc
+
+
+@router.get("/{game_id}", tags=["Games"], response_model=schemas.Game)
+async def get_game(game_id: int, db: Session = Depends(get_db)):
+    """
+    Defines endpoint to retrieve a single game
+    """
+    try:
+        return crud.retrieve_game(db, game_id)
+    except GameDoesNotExistException as exc:
+        raise HTTPException(status_code=404, detail="Game does not exist") from exc

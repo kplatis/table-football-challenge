@@ -6,7 +6,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from api.dependencies import get_db
-from api.exceptions import TeamDoesNotExistException
+from api.exceptions import SameTeamsGameException, TeamDoesNotExistException
 from api.games import schemas, crud
 
 router = APIRouter()
@@ -22,6 +22,10 @@ async def create_new_game(game: schemas.GameCreate, db: Session = Depends(get_db
     except TeamDoesNotExistException as exc:
         raise HTTPException(
             status_code=400, detail="First or second team do not exist"
+        ) from exc
+    except SameTeamsGameException as exc:
+        raise HTTPException(
+            status_code=400, detail="Cannot create a game using the same teams"
         ) from exc
 
 

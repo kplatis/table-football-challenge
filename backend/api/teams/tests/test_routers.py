@@ -81,4 +81,4 @@ class TestTeamsRouters:
         )
         assert response.status_code == 200
         teams = response.json()
-        assert len(teams) == 2
+        assert len(teams) == 4

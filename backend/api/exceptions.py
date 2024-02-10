@@ -25,3 +25,11 @@ class TeamDoesNotExistException(Exception):
     """
 
     pass
+
+
+class SameTeamsGameException(Exception):
+    """
+    Exception thrown when a games with the same teams is created
+    """
+
+    pass

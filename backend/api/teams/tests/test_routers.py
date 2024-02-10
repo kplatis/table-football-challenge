@@ -34,7 +34,7 @@ class TestTeamsRouters:
         assert data["name"] == "Test Name"
         assert "id" in data
 
-    def test_team_creation_throws_400_if_same_user_id(self, test_database):
+    def test_team_creation_throws_400_if_same_player_id(self, test_database):
         """
         Tests router POST /teams with first and second player having the same ID
         """

@@ -2,6 +2,7 @@
 Router definition for Game module
 """
 
+from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from api.dependencies import get_db
@@ -22,3 +23,12 @@ async def create_new_game(game: schemas.GameCreate, db: Session = Depends(get_db
         raise HTTPException(
             status_code=400, detail="First or second team do not exist"
         ) from exc
+
+
+@router.get("", tags=["Games"], response_model=List[schemas.Game])
+async def list_all_games(db: Session = Depends(get_db)):
+    """
+    Defines endpoint to list all games
+    """
+
+    return crud.list_games(db)

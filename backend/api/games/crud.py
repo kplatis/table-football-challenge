@@ -31,3 +31,10 @@ def create_game(db: Session, team: schemas.GameCreate):
     db.commit()
     db.refresh(db_game)
     return db_game
+
+
+def list_games(db: Session):
+    """
+    CRUD action to list all games
+    """
+    return db.query(game_models.Game).all()

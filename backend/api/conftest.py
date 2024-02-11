@@ -2,14 +2,11 @@
 Defines the common fixtures for unit tests
 """
 
-from fastapi.testclient import TestClient
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from api.database import Base
 from api.dependencies import get_db
-from api.games.crud import create_game
-from api.games.models import Game
 from api.main import app
 from api.players.crud import create_player
 from api.players.models import Player

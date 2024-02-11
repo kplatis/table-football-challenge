@@ -1,3 +1,7 @@
+"""
+Schema definition for statistics module
+"""
+
 from pydantic import BaseModel
 
 

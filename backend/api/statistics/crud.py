@@ -57,7 +57,7 @@ def get_statistics_for_team(team_id: int, db: Session):
         stats["goals_for"] += goals_scored_in_game
         stats["goals_against"] += goals_perceived_in_game
     stats["goal_difference"] = stats["goals_for"] - stats["goals_against"]
-    stats["win_ratio"] = float(
-        "{:.2f}".format(stats["wins"] / (stats["wins"] + stats["losses"]))
-    )
+    win_percentage = stats["wins"] / (stats["wins"] + stats["losses"])
+
+    stats["win_ratio"] = float(f"{win_percentage:.2f}")
     return stats

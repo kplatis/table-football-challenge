@@ -23,7 +23,9 @@ async def get_statistics_overview_for_teams_and_players(db: Session = Depends(ge
     """
     Endpoint to retrieve statistics overview for teams and players
     """
+    # retrieve the statistics dictionary of all teams
     team_ids_to_statistics = get_statistics_dictionary_of_all_teams(db)
+    # retrieve the statistics list of all players
     player_statistics = get_statistics_of_all_players(
         team_ids_to_stats=team_ids_to_statistics, db=db
     )

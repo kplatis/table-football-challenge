@@ -42,10 +42,10 @@ def test_statistics_database(test_app):
     # pylint: disable=unused-argument
     with TestingSessionLocal() as db:
         players_data = [
-            {"name": "Player 1"},
-            {"name": "Player 2"},
-            {"name": "Player 3"},
-            {"name": "Player 4"},
+            {"name": "Player1"},
+            {"name": "Player2"},
+            {"name": "Player3"},
+            {"name": "Player4"},
         ]
         for player_data in players_data:
             create_player(db, Player(**player_data))

@@ -34,6 +34,17 @@ def test_application():
     Base.metadata.drop_all(bind=engine)
 
 
+def override_get_db():
+    """
+    Mocks the default database
+    """
+    try:
+        db = TestingSessionLocal()
+        yield db
+    finally:
+        db.close()
+
+
 @pytest.fixture(scope="session")
 def test_statistics_database(test_app):
     """
@@ -107,14 +118,3 @@ def test_statistics_database(test_app):
         db.commit()
     yield TestingSessionLocal()
     Base.metadata.drop_all(bind=engine)
-
-
-def override_get_db():
-    """
-    Mocks the default database
-    """
-    try:
-        db = TestingSessionLocal()
-        yield db
-    finally:
-        db.close()

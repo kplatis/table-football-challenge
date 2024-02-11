@@ -6,7 +6,6 @@ from typing import Dict
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from api.games import models as game_models
-from api.statistics.schemas import Stats
 from api.teams import models as team_models
 from api.players import models as player_models
 from api.statistics.calculator import (
@@ -32,20 +31,22 @@ def get_statistics_for_team(team_id: int, db: Session):
     return calculate_stats_for_team(games=games_played_by_team, team_id=team_id)
 
 
-def get_statistics_of_all_teams(db: Session):
+def get_statistics_dictionary_of_all_teams(db: Session):
     """
     Returns the statistics of all teams
     """
 
     all_teams = db.query(team_models.Team).all()
-    team_to_stats = {}
+    team_ids_to_stats = {}
+    # iterate over all teams
     for team in all_teams:
         statistics = get_statistics_for_team(team_id=team.id, db=db)
-        team_to_stats[team.id] = statistics
-    return team_to_stats
+        statistics["name"] = team.name
+        team_ids_to_stats[team.id] = statistics
+    return team_ids_to_stats
 
 
-def get_statistics_of_all_players(team_ids_to_stats: Dict[int, Stats], db: Session):
+def get_statistics_of_all_players(team_ids_to_stats: Dict[int, Dict], db: Session):
     """
     Given a dictionary of TeamID => stats, calculates the statistics of all players
     """

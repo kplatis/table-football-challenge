@@ -7,7 +7,7 @@ from api.main import app
 from api.statistics.crud import (
     get_statistics_for_team,
     get_statistics_of_all_players,
-    get_statistics_of_all_teams,
+    get_statistics_dictionary_of_all_teams,
 )
 
 
@@ -35,7 +35,7 @@ class TestGameCrud:
         assert statistics["win_ratio"] == 0.33
         assert statistics["goals_for"] == 6
         assert statistics["goals_against"] == 7
-        assert statistics["goal_difference"] == -1
+        assert statistics["goals_difference"] == -1
 
     def test_statistics_retrieval_for_team_2(self, test_statistics_database):
         """
@@ -47,7 +47,7 @@ class TestGameCrud:
         assert statistics["win_ratio"] == 0.67
         assert statistics["goals_for"] == 7
         assert statistics["goals_against"] == 6
-        assert statistics["goal_difference"] == 1
+        assert statistics["goals_difference"] == 1
 
     def test_statistics_retrieval_for_team_3(self, test_statistics_database):
         """
@@ -59,7 +59,7 @@ class TestGameCrud:
         assert statistics["win_ratio"] == 0.75
         assert statistics["goals_for"] == 14
         assert statistics["goals_against"] == 4
-        assert statistics["goal_difference"] == 10
+        assert statistics["goals_difference"] == 10
 
     def test_statistics_retrieval_for_team_4(self, test_statistics_database):
         """
@@ -71,13 +71,15 @@ class TestGameCrud:
         assert statistics["win_ratio"] == 0.25
         assert statistics["goals_for"] == 4
         assert statistics["goals_against"] == 14
-        assert statistics["goal_difference"] == -10
+        assert statistics["goals_difference"] == -10
 
     def test_statistics_retrieval_for_all_teams(self, test_statistics_database):
         """
         Tetst the statistics retrieval for all teams
         """
-        teams_statistics = get_statistics_of_all_teams(db=test_statistics_database)
+        teams_statistics = get_statistics_dictionary_of_all_teams(
+            db=test_statistics_database
+        )
         assert len(teams_statistics.keys()) == 4
         assert teams_statistics[1]["wins"] == 1
         assert teams_statistics[2]["win_ratio"] == 0.67
@@ -91,7 +93,7 @@ class TestGameCrud:
                 "win_ratio": 0.33,
                 "goals_for": 6,
                 "goals_against": 7,
-                "goal_difference": -1,
+                "goals_difference": -1,
             },
             2: {
                 "wins": 2,
@@ -99,7 +101,7 @@ class TestGameCrud:
                 "win_ratio": 0.66,
                 "goals_for": 7,
                 "goals_against": 6,
-                "goal_difference": 1,
+                "goals_difference": 1,
             },
             3: {
                 "wins": 3,
@@ -107,7 +109,7 @@ class TestGameCrud:
                 "win_ratio": 0.75,
                 "goals_for": 14,
                 "goals_against": 4,
-                "goal_difference": 10,
+                "goals_difference": 10,
             },
             4: {
                 "wins": 1,
@@ -115,7 +117,7 @@ class TestGameCrud:
                 "win_ratio": 0.25,
                 "goals_for": 4,
                 "goals_against": 14,
-                "goal_difference": -10,
+                "goals_difference": -10,
             },
         }
 
@@ -128,7 +130,7 @@ class TestGameCrud:
         assert statistics[0]["win_ratio"] == 0.57
         assert statistics[0]["goals_for"] == 20
         assert statistics[0]["goals_against"] == 11
-        assert statistics[0]["goal_difference"] == 9
+        assert statistics[0]["goals_difference"] == 9
 
         assert statistics[1]["name"] == "Player2"
         assert statistics[1]["wins"] == 2
@@ -136,7 +138,7 @@ class TestGameCrud:
         assert statistics[1]["win_ratio"] == 0.67
         assert statistics[1]["goals_for"] == 7
         assert statistics[1]["goals_against"] == 6
-        assert statistics[1]["goal_difference"] == 1
+        assert statistics[1]["goals_difference"] == 1
 
         assert statistics[2]["name"] == "Player3"
         assert statistics[2]["wins"] == 2
@@ -144,7 +146,7 @@ class TestGameCrud:
         assert statistics[2]["win_ratio"] == 0.29
         assert statistics[2]["goals_for"] == 10
         assert statistics[2]["goals_against"] == 21
-        assert statistics[2]["goal_difference"] == -11
+        assert statistics[2]["goals_difference"] == -11
 
         assert statistics[3]["name"] == "Player4"
         assert statistics[3]["wins"] == 2
@@ -152,4 +154,4 @@ class TestGameCrud:
         assert statistics[3]["win_ratio"] == 0.67
         assert statistics[3]["goals_for"] == 7
         assert statistics[3]["goals_against"] == 6
-        assert statistics[3]["goal_difference"] == 1
+        assert statistics[3]["goals_difference"] == 1

@@ -1,6 +1,6 @@
 from typing import Dict, List
 from api.games.models import Game
-from api.statistics.schemas import Stats
+from api.statistics.schemas import StatisticsByTeamOrPlayer
 
 
 def calculate_stats_for_team(games: Game, team_id: int):
@@ -13,7 +13,7 @@ def calculate_stats_for_team(games: Game, team_id: int):
         "win_ratio": 0.0,
         "goals_for": 0,
         "goals_against": 0,
-        "goal_difference": 0,
+        "goals_difference": 0,
     }
     # iterate over each game and update stats
     for game in games:
@@ -42,7 +42,7 @@ def calculate_stats_for_team(games: Game, team_id: int):
             stats["losses"] += 1
         stats["goals_for"] += goals_scored_in_game
         stats["goals_against"] += goals_perceived_in_game
-    stats["goal_difference"] = stats["goals_for"] - stats["goals_against"]
+    stats["goals_difference"] = stats["goals_for"] - stats["goals_against"]
     win_percentage = stats["wins"] / (stats["wins"] + stats["losses"])
 
     stats["win_ratio"] = float(f"{win_percentage:.2f}")
@@ -50,11 +50,11 @@ def calculate_stats_for_team(games: Game, team_id: int):
 
 
 def calculate_stats_for_player(
-    teams_of_player: List[int], team_ids_to_stats: Dict[int, Stats]
+    teams_of_player: List[int], team_ids_to_stats: Dict[int, Dict]
 ):
     """
-    Calculates the stats for a player, given a list of the IDs of the teams that the player took part in (teams_of_players)
-    and a dictionary with the Ids of the teams and the stats
+    Calculates the stats for a player, given a list of the IDs of the teams that the player
+    took part in (teams_of_players) and a dictionary with the Ids of the teams and the stats
     """
     stats = {
         "wins": 0,
@@ -62,7 +62,7 @@ def calculate_stats_for_player(
         "win_ratio": 0.0,
         "goals_for": 0,
         "goals_against": 0,
-        "goal_difference": 0,
+        "goals_difference": 0,
     }
     for team_id in teams_of_player:
         team_stats = team_ids_to_stats[team_id]
@@ -70,7 +70,7 @@ def calculate_stats_for_player(
         stats["losses"] += team_stats["losses"]
         stats["goals_for"] += team_stats["goals_for"]
         stats["goals_against"] += team_stats["goals_against"]
-        stats["goal_difference"] += team_stats["goal_difference"]
+        stats["goals_difference"] += team_stats["goals_difference"]
     win_percentage = stats["wins"] / (stats["wins"] + stats["losses"])
     stats["win_ratio"] = float(f"{win_percentage:.2f}")
     return stats

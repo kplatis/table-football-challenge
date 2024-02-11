@@ -25,6 +25,10 @@ tags_metadata = [
         "name": "Games",
         "description": "Operations related to games",
     },
+    {
+        "name": "Statistics",
+        "description": "Operations related to statistics",
+    },
 ]
 
 app = FastAPI(openapi_tags=tags_metadata)

@@ -20,7 +20,7 @@ class TestGamesRouters:
         """
         cls.client = TestClient(app)
 
-    def test_successful_game_creation(self, test_database):
+    def test_successful_game_creation(self, test_main_database):
         """
         Tests router POST /games
         """
@@ -33,7 +33,7 @@ class TestGamesRouters:
         data = response.json()
         assert "id" in data
 
-    def test_game_creation_throws_400_if_same_team_id(self, test_database):
+    def test_game_creation_throws_400_if_same_team_id(self, test_main_database):
         """
         Tests router POST /games with first and second team having the same ID
         """
@@ -44,7 +44,9 @@ class TestGamesRouters:
         )
         assert response.status_code == 400
 
-    def test_game_creation_throws_400_if_first_team_does_not_exist(self, test_database):
+    def test_game_creation_throws_400_if_first_team_does_not_exist(
+        self, test_main_database
+    ):
         """
         Tests router POST /games with first team not existing
         """
@@ -56,7 +58,7 @@ class TestGamesRouters:
         assert response.status_code == 400
 
     def test_game_creation_throws_400_if_second_team_does_not_exist(
-        self, test_database
+        self, test_main_database
     ):
         """
         Tests router POST /games with second team not existing
@@ -68,7 +70,7 @@ class TestGamesRouters:
         )
         assert response.status_code == 400
 
-    def test_game_listing_returns_all_games(self, test_database):
+    def test_game_listing_returns_all_games(self, test_main_database):
         """
         Tests router GET /games
         """
@@ -80,7 +82,7 @@ class TestGamesRouters:
         teams = response.json()
         assert len(teams) == 3
 
-    def test_game_partial_update_returns_200_if_correct(self, test_database):
+    def test_game_partial_update_returns_200_if_correct(self, test_main_database):
         """
         Tests router GET /games
         """
@@ -95,7 +97,7 @@ class TestGamesRouters:
         assert game["second_team_goals"] == 1
 
     def test_game_partial_update_returns_404_if_game_does_not_exist(
-        self, test_database
+        self, test_main_database
     ):
         """
         Tests router GET /games
@@ -107,7 +109,7 @@ class TestGamesRouters:
         )
         assert response.status_code == 404
 
-    def test_game_retrieval_returns_game(self, test_database):
+    def test_game_retrieval_returns_game(self, test_main_database):
         """
         Tests router GET /games/<ID>
         """
@@ -119,7 +121,9 @@ class TestGamesRouters:
         team = response.json()
         assert team["id"] == 1
 
-    def test_game_retrieval_returns_404_if_game_does_not_exist(self, test_database):
+    def test_game_retrieval_returns_404_if_game_does_not_exist(
+        self, test_main_database
+    ):
         """
         Tests router GET /games/<ID> throws 404
         """

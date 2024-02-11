@@ -20,7 +20,7 @@ class TestTeamsRouters:
         """
         cls.client = TestClient(app)
 
-    def test_successful_team_creation(self, test_database):
+    def test_successful_team_creation(self, test_main_database):
         """
         Tests router POST /teams
         """
@@ -34,7 +34,7 @@ class TestTeamsRouters:
         assert data["name"] == "Test Name"
         assert "id" in data
 
-    def test_team_creation_throws_400_if_same_player_id(self, test_database):
+    def test_team_creation_throws_400_if_same_player_id(self, test_main_database):
         """
         Tests router POST /teams with first and second player having the same ID
         """
@@ -46,7 +46,7 @@ class TestTeamsRouters:
         assert response.status_code == 400
 
     def test_team_creation_throws_400_if_first_player_does_not_exist(
-        self, test_database
+        self, test_main_database
     ):
         """
         Tests router POST /teams with first player not existing
@@ -59,7 +59,7 @@ class TestTeamsRouters:
         assert response.status_code == 400
 
     def test_team_creation_throws_400_if_second_player_does_not_exist(
-        self, test_database
+        self, test_main_database
     ):
         """
         Tests router POST /teams with second player not existing
@@ -71,7 +71,7 @@ class TestTeamsRouters:
         )
         assert response.status_code == 400
 
-    def test_team_listing_returns_all_teams(self, test_database):
+    def test_team_listing_returns_all_teams(self, test_main_database):
         """
         Tests router GET /teams
         """

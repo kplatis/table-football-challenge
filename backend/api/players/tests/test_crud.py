@@ -23,17 +23,17 @@ class TestPlayerCrud:
         """
         cls.client = TestClient(app)
 
-    def test_create_player(self, test_database):
+    def test_create_player(self, test_main_database):
         """
         Tests successful player creation
         """
         player = PlayerCreate(name="test")
-        created_player = create_player(db=test_database, player=player)
+        created_player = create_player(db=test_main_database, player=player)
         assert isinstance(created_player, Player)
 
-    def test_get_players(self, test_database):
+    def test_get_players(self, test_main_database):
         """
         Tests successful listing of players
         """
-        players = get_players(db=test_database)
+        players = get_players(db=test_main_database)
         assert len(players) == 5

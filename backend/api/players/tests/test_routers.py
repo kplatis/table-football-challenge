@@ -20,7 +20,7 @@ class TestPlayerRouters:
         """
         cls.client = TestClient(app)
 
-    def test_player_creation(self, test_database):
+    def test_player_creation(self, test_main_database):
         """
         Tests router POST /players
         """
@@ -34,7 +34,7 @@ class TestPlayerRouters:
         assert data["name"] == "Test Name"
         assert "id" in data
 
-    def test_players_listing(self, test_database):
+    def test_players_listing(self, test_main_database):
         """
         Tests router GET /players
         """

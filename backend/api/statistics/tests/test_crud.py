@@ -2,8 +2,6 @@
 Define unit tests for CRUD actions of statistics
 """
 
-from fastapi.testclient import TestClient
-from api.main import app
 from api.statistics.crud import (
     get_statistics_of_team,
     get_statistics_of_all_players,

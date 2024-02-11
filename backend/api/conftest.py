@@ -17,30 +17,35 @@ from api.teams.crud import create_team
 from api.teams.models import Team
 
 
-@pytest.fixture(scope="module")
-def test_db_engine():
-    SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
-
+@pytest.fixture(scope="module", name="test_db_engine")
+def test_db_engine_fixture():
+    """
+    Fixture to define db engine
+    """
     engine = create_engine(
-        SQLALCHEMY_DATABASE_URL,
+        "sqlite:///./test.db",
         connect_args={"check_same_thread": False},
         poolclass=StaticPool,
     )
     yield engine
 
 
-@pytest.fixture(scope="module")
-def test_db_session(test_db_engine):
-
-    TestingSessionLocal = sessionmaker(
+@pytest.fixture(scope="module", name="test_db_session")
+def test_db_session_fixture(test_db_engine):
+    """
+    Fixture to define db session
+    """
+    testing_session_local = sessionmaker(
         autocommit=False, autoflush=False, bind=test_db_engine
     )
-    yield TestingSessionLocal
+    yield testing_session_local
 
 
-@pytest.fixture(scope="module")
-def test_client(test_db_engine, test_db_session):
-
+@pytest.fixture(scope="module", name="test_client")
+def test_client_fixture(test_db_engine, test_db_session):
+    """
+    Fixture to define session client
+    """
     Base.metadata.create_all(bind=test_db_engine)
 
     def override_get_db():
@@ -56,8 +61,8 @@ def test_client(test_db_engine, test_db_session):
     yield client
 
 
-@pytest.fixture(scope="module")
-def test_main_database(test_db_engine, test_db_session, test_client):
+@pytest.fixture(scope="module", name="test_main_database")
+def test_main_database_fixture(test_db_engine, test_db_session, test_client):
     """
     Setup a test main database with players and teams
     """

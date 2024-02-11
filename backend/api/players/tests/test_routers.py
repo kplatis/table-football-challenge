@@ -2,9 +2,6 @@
 Test module for Player routers
 """
 
-from fastapi.testclient import TestClient
-from api.main import app
-
 
 def test_player_creation(test_main_database, test_client):
     """

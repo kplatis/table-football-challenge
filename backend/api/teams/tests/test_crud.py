@@ -2,10 +2,8 @@
 Test module for Player CRUD actions
 """
 
-from fastapi.testclient import TestClient
 import pytest
 from api.exceptions import PlayerDoesNotExistException, SamePlayersTeamException
-from api.main import app
 from api.teams.crud import create_team, get_teams
 from api.teams.models import Team
 from api.teams.schemas import TeamCreate

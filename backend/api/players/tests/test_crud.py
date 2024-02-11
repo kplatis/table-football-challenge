@@ -2,14 +2,12 @@
 Unit test module for crud actions
 """
 
-from fastapi.testclient import TestClient
-from api.main import app
 from api.players.crud import create_player, get_players
 from api.players.models import Player
 from api.players.schemas import PlayerCreate
 
 
-def test_create_player(test_main_database, test_client):
+def test_create_player(test_main_database):
     """
     Tests successful player creation
     """

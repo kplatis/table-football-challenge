@@ -5,26 +5,21 @@ import { useDisclosure } from '@mantine/hooks'
 import classes from './Header.module.css'
 
 const links = [
-  { link: '/about', label: 'Features' },
   {
     link: '#1',
-    label: 'Learn',
+    label: 'Games',
     links: [
-      { link: '/docs', label: 'Documentation' },
-      { link: '/resources', label: 'Resources' },
-      { link: '/community', label: 'Community' },
-      { link: '/blog', label: 'Blog' },
+      { link: '/games', label: 'List Games' },
+      { link: '/games/create', label: 'Create new game' },
     ],
   },
-  { link: '/about', label: 'About' },
-  { link: '/pricing', label: 'Pricing' },
+  { link: '/overview', label: 'Overview' },
   {
     link: '#2',
-    label: 'Support',
+    label: 'Teams',
     links: [
-      { link: '/faq', label: 'FAQ' },
-      { link: '/demo', label: 'Book a demo' },
-      { link: '/forums', label: 'Forums' },
+      { link: '/teams', label: 'List teams' },
+      { link: '/teams/create', label: 'Create a new team' },
     ],
   },
 ]
@@ -77,7 +72,7 @@ export function Header() {
     <header className={classes.header}>
       <div className={classes.inner}>
         <div>Challenge</div>
-        <Group gap={5} visibleFrom="sm">
+        <Group gap={10} visibleFrom="sm">
           {items}
         </Group>
         <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />

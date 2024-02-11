@@ -32,12 +32,23 @@ def get_statistics_for_team(team_id: int, db: Session):
     # iterate over each game and update stats
     for game in games_played_by_team:
         # depending on which team is the one checking, setting the values of goals scored and perceived
-        goals_scored_in_game = game[
-            "first_team_goals" if game.first_team_id == team_id else "second_team_goals"
-        ]
-        goals_perceived_in_game = game[
-            "second_team_goals" if game.first_team_id == team_id else "first_team_goals"
-        ]
+        goals_scored_in_game = getattr(
+            game,
+            (
+                "first_team_goals"
+                if game.first_team_id == team_id
+                else "second_team_goals"
+            ),
+        )
+        goals_perceived_in_game = getattr(
+            game,
+            (
+                "second_team_goals"
+                if game.first_team_id == team_id
+                else "first_team_goals"
+            ),
+        )
+
         # given there is no draw
         if goals_scored_in_game > goals_perceived_in_game:
             stats["wins"] += 1
@@ -46,5 +57,7 @@ def get_statistics_for_team(team_id: int, db: Session):
         stats["goals_for"] += goals_scored_in_game
         stats["goals_against"] += goals_perceived_in_game
     stats["goal_difference"] = stats["goals_for"] - stats["goals_against"]
-    stats["win_ratio"] = stats["wins"] / (stats["wins"] + stats["losses"])
+    stats["win_ratio"] = float(
+        "{:.2f}".format(stats["wins"] / (stats["wins"] + stats["losses"]))
+    )
     return stats

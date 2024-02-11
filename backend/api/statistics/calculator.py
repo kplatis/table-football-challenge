@@ -1,6 +1,9 @@
+"""
+Calculator functions for Statistics module
+"""
+
 from typing import Dict, List
 from api.games.models import Game
-from api.statistics.schemas import StatisticsByTeamOrPlayer
 
 
 def calculate_stats_for_team(games: Game, team_id: int):

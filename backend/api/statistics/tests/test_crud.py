@@ -85,6 +85,9 @@ class TestGameCrud:
         assert teams_statistics[2]["win_ratio"] == 0.67
 
     def test_statistics_retrieval_for_all_players(self, test_statistics_database):
+        """
+        Tests the statistics retrieval for all players
+        """
 
         team_ids_to_stats = {
             1: {

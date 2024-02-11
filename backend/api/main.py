@@ -8,7 +8,7 @@ from api.teams import routers as team_routers
 from api.players import routers as players_routers
 from api.games import routers as games_routers
 from api.statistics import routers as stats_routers
-
+from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(bind=engine)
 
@@ -33,6 +33,13 @@ tags_metadata = [
 
 app = FastAPI(openapi_tags=tags_metadata)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(players_routers.router, prefix="/players")
 app.include_router(team_routers.router, prefix="/teams")

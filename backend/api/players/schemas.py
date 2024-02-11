@@ -2,7 +2,9 @@
 Schema declaration for Players module
 """
 
+from typing import List
 from pydantic import BaseModel
+from api.teams.schemas import Team
 
 
 class PlayerBase(BaseModel):
@@ -27,3 +29,5 @@ class Player(PlayerBase):
     """
 
     id: int
+    first_player_teams: List[Team]
+    second_player_teams: List[Team]

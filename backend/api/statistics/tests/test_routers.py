@@ -2,32 +2,15 @@
 Test module for Statistics routers
 """
 
-from fastapi.testclient import TestClient
-from api.main import app
 
-
-class TestStatisticsRouters:
+def test_statistics_overview_returns_both_players_and_teams(
+    test_main_database, test_client
+):
     """
-    Class to test the player routers
+    Tests router POST /statistics/overview
     """
-
-    client = None
-
-    @classmethod
-    def setup_class(cls):
-        """
-        Setup method that runs before all tests
-        """
-        cls.client = TestClient(app)
-
-    def test_statistics_overview_returns_both_players_and_teams(
-        self, test_statistics_database
-    ):
-        """
-        Tests router POST /statistics/overview
-        """
-        # pylint: disable=unused-argument
-        response = self.client.get("/statistics/overview")
-        assert response.status_code == 200
-        data = response.json()
-        assert len(data) == 8
+    # pylint: disable=unused-argument
+    response = test_client.get("/statistics/overview")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 8

@@ -9,31 +9,18 @@ from api.players.models import Player
 from api.players.schemas import PlayerCreate
 
 
-class TestPlayerCrud:
+def test_create_player(test_main_database, test_client):
     """
-    Tests the CRUD functions for player
+    Tests successful player creation
     """
+    player = PlayerCreate(name="test")
+    created_player = create_player(db=test_main_database, player=player)
+    assert isinstance(created_player, Player)
 
-    client = None
 
-    @classmethod
-    def setup_class(cls):
-        """
-        Setup method that runs before all tests
-        """
-        cls.client = TestClient(app)
-
-    def test_create_player(self, test_main_database):
-        """
-        Tests successful player creation
-        """
-        player = PlayerCreate(name="test")
-        created_player = create_player(db=test_main_database, player=player)
-        assert isinstance(created_player, Player)
-
-    def test_get_players(self, test_main_database):
-        """
-        Tests successful listing of players
-        """
-        players = get_players(db=test_main_database)
-        assert len(players) == 5
+def test_get_players(test_main_database):
+    """
+    Tests successful listing of players
+    """
+    players = get_players(db=test_main_database)
+    assert len(players) == 5

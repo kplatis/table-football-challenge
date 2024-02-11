@@ -12,3 +12,10 @@
 **/*.db
 
 **/api.egg-info/*
+
+
+## FRONTEND
+
+**/node_modules
+**/.next/
+**/out/

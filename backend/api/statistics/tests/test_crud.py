@@ -5,7 +5,7 @@ Define unit tests for CRUD actions of statistics
 from fastapi.testclient import TestClient
 from api.main import app
 from api.statistics.crud import (
-    get_statistics_for_team,
+    get_statistics_of_team,
     get_statistics_of_all_players,
     get_statistics_dictionary_of_all_teams,
 )
@@ -29,7 +29,7 @@ class TestGameCrud:
         """
         Tests the CRUD action to retrieve statistics for a single team
         """
-        statistics = get_statistics_for_team(1, db=test_statistics_database)
+        statistics = get_statistics_of_team(1, db=test_statistics_database)
         assert statistics["wins"] == 1
         assert statistics["losses"] == 2
         assert statistics["win_ratio"] == 0.33
@@ -41,7 +41,7 @@ class TestGameCrud:
         """
         Tests the CRUD action to retrieve statistics for a single team
         """
-        statistics = get_statistics_for_team(2, db=test_statistics_database)
+        statistics = get_statistics_of_team(2, db=test_statistics_database)
         assert statistics["wins"] == 2
         assert statistics["losses"] == 1
         assert statistics["win_ratio"] == 0.67
@@ -53,7 +53,7 @@ class TestGameCrud:
         """
         Tests the CRUD action to retrieve statistics for a single team
         """
-        statistics = get_statistics_for_team(3, db=test_statistics_database)
+        statistics = get_statistics_of_team(3, db=test_statistics_database)
         assert statistics["wins"] == 3
         assert statistics["losses"] == 1
         assert statistics["win_ratio"] == 0.75
@@ -65,7 +65,7 @@ class TestGameCrud:
         """
         Tests the CRUD action to retrieve statistics for a single team
         """
-        statistics = get_statistics_for_team(4, db=test_statistics_database)
+        statistics = get_statistics_of_team(4, db=test_statistics_database)
         assert statistics["wins"] == 1
         assert statistics["losses"] == 3
         assert statistics["win_ratio"] == 0.25

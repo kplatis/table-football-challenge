@@ -14,7 +14,7 @@ from api.statistics.calculator import (
 )
 
 
-def get_statistics_for_team(team_id: int, db: Session):
+def get_statistics_of_team(team_id: int, db: Session):
     """
     Returns the statistics for a single team
     """
@@ -40,7 +40,7 @@ def get_statistics_dictionary_of_all_teams(db: Session):
     team_ids_to_stats = {}
     # iterate over all teams
     for team in all_teams:
-        statistics = get_statistics_for_team(team_id=team.id, db=db)
+        statistics = get_statistics_of_team(team_id=team.id, db=db)
         statistics["name"] = team.name
         team_ids_to_stats[team.id] = statistics
     return team_ids_to_stats

@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <Container size="md">
             <Header />
-            {children}
+            <div className="mt-10">{children}</div>
           </Container>
         </Providers>
       </body>

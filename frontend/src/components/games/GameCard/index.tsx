@@ -1,5 +1,5 @@
 import { Game } from '@/types/games'
-import { Card, Group, Text, Stack, Title, Center } from '@mantine/core'
+import { Card, Group, Text, Stack } from '@mantine/core'
 import classes from './GamesCard.module.css'
 import TeamBadge from '@/components/teams/TeamBadge'
 

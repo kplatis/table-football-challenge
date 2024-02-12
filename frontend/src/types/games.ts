@@ -7,3 +7,4 @@ export type Game = {
   first_team_goals: number
   second_team_goals: number
 }
+

@@ -1,5 +1,6 @@
 import '@mantine/core/styles.css'
 import './styles.css'
+import '@mantine/notifications/styles.css'
 import { ColorSchemeScript, Container } from '@mantine/core'
 import { Header } from '@/components/Header'
 import Providers from '@/components/Providers'
@@ -23,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <Container size="md">
             <Header />
-            {children}
+            <div className="mt-10">{children}</div>
           </Container>
         </Providers>
       </body>

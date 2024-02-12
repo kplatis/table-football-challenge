@@ -4,6 +4,7 @@ import { Menu, Group, Center, Burger } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import classes from './Header.module.css'
 import Link from 'next/link'
+import { IconChevronDown } from '@tabler/icons-react'
 
 const links = [
   {
@@ -47,6 +48,7 @@ export function Header() {
             <Link href={link.link} className={classes.link}>
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
+                <IconChevronDown size="0.9rem" stroke={1.5} />
               </Center>
             </Link>
           </Menu.Target>

@@ -1,6 +1,5 @@
 import { Game } from '@/types/games'
 import { Card, Group, Text, Stack } from '@mantine/core'
-import classes from './GamesCard.module.css'
 import TeamBadge from '@/components/teams/TeamBadge'
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
 
 export default function GameCard({ game }: Props) {
   return (
-    <Card withBorder p="xl" radius="md" className={classes.card}>
+    <Card withBorder p="xl" radius="md">
       <Group>
         <div>
           <Stack>
@@ -35,7 +34,7 @@ export default function GameCard({ game }: Props) {
               </Stack>
             </Group>
             <div>
-              <Text fz="md" mb={6} className={classes.label}>
+              <Text fz="md" mb={6}>
                 {game.first_team.name}
               </Text>
               <TeamBadge
@@ -44,7 +43,7 @@ export default function GameCard({ game }: Props) {
               />
             </div>
             <div>
-              <Text fz="md" mb={6} className={classes.label}>
+              <Text fz="md" mb={6}>
                 {game.second_team.name}
               </Text>
               <TeamBadge

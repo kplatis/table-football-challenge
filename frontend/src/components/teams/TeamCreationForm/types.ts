@@ -5,7 +5,7 @@ export type TeamCreationDataPreValidation = {
 }
 
 export type TeamCreationDataPostValidation = {
-    name: string
-    firstPlayer: string
-    secondPlayer: string | null
-  }
+  name: string
+  firstPlayer: string
+  secondPlayer: string | null
+}

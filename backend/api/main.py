@@ -3,12 +3,13 @@ Main application that initializes the table football challenge API
 """
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from api.database import Base, engine
 from api.teams import routers as team_routers
 from api.players import routers as players_routers
 from api.games import routers as games_routers
 from api.statistics import routers as stats_routers
-from fastapi.middleware.cors import CORSMiddleware
+
 
 Base.metadata.create_all(bind=engine)
 

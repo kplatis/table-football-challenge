@@ -14,3 +14,4 @@ export type GameCreationSchema = {
   first_team_goals: number
   second_team_goals: number
 }
+

@@ -1,17 +1,18 @@
 import { GameCreationDataPreValidation } from './types'
 
 /**
- * Validation function for first team
+ * Validation function for first player
  */
 export function validateFirstTeam(
   value: number,
   values: GameCreationDataPreValidation,
 ) {
-  // if first team value is not set
+  console.log(value, values)
+  // if first player value is not set
   if (value === null) {
     return 'First Team is required'
   }
-  // if selected same first and second team
+  // if selected same first and second player
   if (values.secondTeamId && value === values.secondTeamId) {
     return 'First and second team cannot be the same'
   }
@@ -19,17 +20,17 @@ export function validateFirstTeam(
 }
 
 /**
- * Validation function for first team
+ * Validation function for first player
  */
 export function validateSecondTeam(
   value: number,
   values: GameCreationDataPreValidation,
 ) {
-  // if first team value is not set
+  // if first player value is not set
   if (value === null) {
     return 'Second Team is required'
   }
-  // if selected same first and second team
+  // if selected same first and second player
   if (values.firstTeamId && value === values.firstTeamId) {
     return 'First and second team cannot be the same'
   }

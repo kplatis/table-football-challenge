@@ -1,11 +1,10 @@
 'use client'
 
 import { Player } from '@/types/players'
-import { Badge, Button, Card, Center, Group, Text } from '@mantine/core'
+import { Button, Card, Center, Group, Text } from '@mantine/core'
 import classes from './TeamCard.module.css'
-import { IconUsers } from '@tabler/icons-react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import TeamBadge from '../TeamBadge'
 
 type TeamCardProps = {
   id: number
@@ -32,32 +31,13 @@ export default function TeamCard({
           Players
         </Text>
 
-        <Group gap={8} mb={-8}>
-          <Center>
-            <IconUsers size="1.05rem" className={classes.icon} stroke={1.5} />
-            <Badge variant="outline" className="ml-2">
-              <Link href={`/players/${firstPlayer.id}`}>
-                {firstPlayer.name}
-              </Link>
-            </Badge>
-          </Center>
-          {secondPlayer && (
-            <Center>
-              <IconUsers size="1.05rem" className={classes.icon} stroke={1.5} />
-              <Badge variant="outline" className="ml-2">
-                <Link href={`/players/${secondPlayer.id}`}>
-                  {secondPlayer.name}
-                </Link>
-              </Badge>
-            </Center>
-          )}
-        </Group>
+        <TeamBadge firstPlayer={firstPlayer} secondPlayer={secondPlayer} />
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group gap={30}>
+        <Center>
           <Button
-            size="md"
+            size="xs"
             radius="xl"
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
@@ -68,7 +48,7 @@ export default function TeamCard({
           >
             Visit Team Page
           </Button>
-        </Group>
+        </Center>
       </Card.Section>
     </Card>
   )

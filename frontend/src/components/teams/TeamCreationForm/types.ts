@@ -3,9 +3,3 @@ export type TeamCreationDataPreValidation = {
   firstPlayer: string | null
   secondPlayer: string | null
 }
-
-export type TeamCreationDataPostValidation = {
-  name: string
-  firstPlayer: string
-  secondPlayer: string | null
-}

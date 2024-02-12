@@ -7,7 +7,6 @@ export function validateFirstTeam(
   value: number,
   values: GameCreationDataPreValidation,
 ) {
-  console.log(value, values)
   // if first player value is not set
   if (value === null) {
     return 'First Team is required'

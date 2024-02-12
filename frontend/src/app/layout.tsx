@@ -1,11 +1,12 @@
 import '@mantine/core/styles.css'
-
-import { ColorSchemeScript, Container, MantineProvider } from '@mantine/core'
+import './styles.css'
+import { ColorSchemeScript, Container } from '@mantine/core'
 import { Header } from '@/components/Header'
+import Providers from '@/components/Providers'
 
 export const metadata = {
-  title: 'My Mantine app',
-  description: 'I have followed setup instructions carefully',
+  title: 'Table Football Challenge',
+  description: '',
 }
 
 export default function RootLayout({
@@ -19,12 +20,12 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>
+        <Providers>
           <Container size="md">
             <Header />
             {children}
           </Container>
-        </MantineProvider>
+        </Providers>
       </body>
     </html>
   )

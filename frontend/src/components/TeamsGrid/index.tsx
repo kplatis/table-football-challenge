@@ -14,7 +14,12 @@ export default function TeamsGrid() {
     return (
       <SimpleGrid cols={3}>
         {data.map((team) => (
-          <TeamCard key={team.id} />
+          <TeamCard
+            key={team.id}
+            name={team.name}
+            firstPlayer={team.first_player}
+            secondPlayer={team.second_player}
+          />
         ))}
       </SimpleGrid>
     )

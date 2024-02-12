@@ -4,5 +4,5 @@ export type Team = {
   id: number
   name: string
   first_player: Player
-  second_player: Player
+  second_player?: Player
 }

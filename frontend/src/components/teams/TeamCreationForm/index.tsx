@@ -4,6 +4,7 @@ import {
   Button,
   Group,
   Loader,
+  Modal,
   Select,
   Stack,
   TextInput,
@@ -15,10 +16,12 @@ import usePlayers from '@/hooks/usePlayers'
 import { validateFirstPlayer, validateSecondPlayer } from './validation'
 import axios from 'axios'
 import { TeamCreate } from '@/types/teams'
+import PlayerCreationForm from '@/components/players/PlayerCreationForm'
+import { useDisclosure } from '@mantine/hooks'
 
 export default function TeamCreationForm() {
-  const { isLoading, data } = usePlayers()
-
+  const { isLoading, data, refetch } = usePlayers()
+  const [opened, { open, close }] = useDisclosure(false)
   const form = useForm({
     initialValues: {
       name: '',
@@ -31,6 +34,16 @@ export default function TeamCreationForm() {
       secondPlayer: validateSecondPlayer,
     },
   })
+
+  /**
+   * Function called when the player is created.
+   */
+  const onPlayerCreated = () => {
+    // close the modal
+    close()
+    // refetch players data
+    refetch()
+  }
 
   const submit = (values: any) => {
     const data: TeamCreate = {
@@ -65,52 +78,58 @@ export default function TeamCreationForm() {
     }))
 
     return (
-      <form onSubmit={form.onSubmit(submit)}>
-        <Title
-          order={2}
-          size="h1"
-          style={{ fontFamily: 'Greycliff CF, var(--mantine-font-family)' }}
-          fw={900}
-          ta="center"
-        >
-          Create a new team
-        </Title>
-        <Stack h={300} bg="var(--mantine-color-body)" gap="lg">
-          <TextInput
-            label="Name"
-            placeholder="Team's name"
-            name="name"
-            variant="filled"
-            required={true}
-            {...form.getInputProps('name')}
-          />
-          <Group justify="space-between" grow>
-            <Select
-              label="First Player"
-              name="firstPlayer"
-              placeholder="Pick a player"
-              data={playerData}
+      <>
+        <Modal opened={opened} onClose={close} title="Create new Player">
+          <PlayerCreationForm onSuccessFn={onPlayerCreated} />
+        </Modal>
+        <form onSubmit={form.onSubmit(submit)}>
+          <Title
+            order={2}
+            size="h1"
+            style={{ fontFamily: 'Greycliff CF, var(--mantine-font-family)' }}
+            fw={900}
+            ta="center"
+          >
+            Create a new team
+          </Title>
+          <Stack h={300} bg="var(--mantine-color-body)" gap="lg">
+            <TextInput
+              label="Name"
+              placeholder="Team's name"
+              name="name"
+              variant="filled"
               required={true}
-              {...form.getInputProps('firstPlayer')}
+              {...form.getInputProps('name')}
             />
+            <Group justify="space-between" grow>
+              <Select
+                label="First Player"
+                name="firstPlayer"
+                placeholder="Pick a player"
+                data={playerData}
+                required={true}
+                {...form.getInputProps('firstPlayer')}
+              />
 
-            <Select
-              label="Second Player"
-              name="secondPlayer"
-              placeholder="Pick a player"
-              data={playerData}
-              {...form.getInputProps('secondPlayer')}
-            />
-            <Button>Create new player</Button>
+              <Select
+                label="Second Player"
+                name="secondPlayer"
+                placeholder="Pick a player"
+                data={playerData}
+                {...form.getInputProps('secondPlayer')}
+              />
+
+              <Button onClick={open}>Create new player</Button>
+            </Group>
+          </Stack>
+
+          <Group justify="center" mt="md">
+            <Button type="submit" size="md">
+              Create Team
+            </Button>
           </Group>
-        </Stack>
-
-        <Group justify="center" mt="md">
-          <Button type="submit" size="md">
-            Create Team
-          </Button>
-        </Group>
-      </form>
+        </form>
+      </>
     )
   }
 

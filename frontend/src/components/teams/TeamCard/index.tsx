@@ -55,9 +55,9 @@ export default function TeamCard({
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group gap={30}>
+        <Center>
           <Button
-            size="md"
+            size="xs"
             radius="xl"
             variant="gradient"
             gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
@@ -68,7 +68,7 @@ export default function TeamCard({
           >
             Visit Team Page
           </Button>
-        </Group>
+        </Center>
       </Card.Section>
     </Card>
   )

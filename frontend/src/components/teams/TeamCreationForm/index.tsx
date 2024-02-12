@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Center,
   Group,
   Loader,
   Modal,
@@ -66,9 +67,9 @@ export default function TeamCreationForm() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center">
+      <Center>
         <Loader color="blue" />
-      </div>
+      </Center>
     )
   }
   if (data) {
@@ -92,7 +93,7 @@ export default function TeamCreationForm() {
           >
             Create a new team
           </Title>
-          <Stack h={300} bg="var(--mantine-color-body)" gap="lg">
+          <Stack h={200} bg="var(--mantine-color-body)" gap="lg">
             <TextInput
               label="Name"
               placeholder="Team's name"
@@ -101,7 +102,7 @@ export default function TeamCreationForm() {
               required={true}
               {...form.getInputProps('name')}
             />
-            <Group justify="space-between" grow>
+            <Group justify="space-between">
               <Select
                 label="First Player"
                 name="firstPlayer"

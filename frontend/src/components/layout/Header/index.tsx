@@ -7,21 +7,21 @@ import Link from 'next/link'
 import { IconChevronDown } from '@tabler/icons-react'
 
 const links = [
-  {
-    link: '#1',
-    label: 'Games',
-    links: [
-      { link: '/games', label: 'List Games' },
-      { link: '/games/create', label: 'Create new game' },
-    ],
-  },
   { link: '/overview', label: 'Overview' },
   {
-    link: '#2',
+    link: '#1',
     label: 'Teams',
     links: [
       { link: '/teams', label: 'List teams' },
       { link: '/teams/create', label: 'Create a new team' },
+    ],
+  },
+  {
+    link: '#2',
+    label: 'Games',
+    links: [
+      { link: '/games', label: 'List Games' },
+      { link: '/games/create', label: 'Create new game' },
     ],
   },
 ]

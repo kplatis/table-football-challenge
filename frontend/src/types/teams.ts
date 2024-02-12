@@ -6,3 +6,9 @@ export type Team = {
   first_player: Player
   second_player?: Player
 }
+
+export type TeamCreate = {
+  name: string
+  first_player_id: number
+  second_player_id?: number
+}

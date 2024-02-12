@@ -9,45 +9,21 @@ import {
   TextInput,
   Title,
 } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import { useForm } from '@mantine/form'
 import usePlayers from '@/hooks/usePlayers'
-
-type TeamCreationData = {
-  name: string
-  firstPlayer?: string
-  secondPlayer?: string
-}
+import { validateFirstPlayer, validateSecondPlayer } from './validation'
+import axios from 'axios'
+import { TeamCreate } from '@/types/teams'
 
 export default function TeamCreationForm() {
   const { isLoading, data } = usePlayers()
-  /**
-   * Validation function for first player
-   */
-  const validateFirstPlayer = (value: string, values: TeamCreationData) => {
-    // if first player value is not set
-    if (value === undefined) {
-      return 'First player is required'
-    }
-    // if selected same first and second player
-    if (values.secondPlayer && value === values.secondPlayer) {
-      return 'First and second player cannot be the same'
-    }
-    return null
-  }
-
-  const validateSecondPlayer = (value: string, values: TeamCreationData) => {
-    // if selected same first and second player
-    if (values.firstPlayer && value === values.firstPlayer) {
-      return 'First and second player cannot be the same'
-    }
-    return null
-  }
 
   const form = useForm({
     initialValues: {
       name: '',
-      firstPlayer: undefined,
-      secondPlayer: undefined,
+      firstPlayer: null,
+      secondPlayer: null,
     },
     validate: {
       name: (value) => value.trim().length < 2,
@@ -55,6 +31,25 @@ export default function TeamCreationForm() {
       secondPlayer: validateSecondPlayer,
     },
   })
+
+  const submit = (values: any) => {
+    const data: TeamCreate = {
+      name: values.name,
+      first_player_id: parseInt(values.firstPlayer, 10),
+    }
+    if (values.secondPlayer !== undefined) {
+      data['second_player_id'] = parseInt(values.secondPlayer, 10)
+    }
+
+    axios.post('http://localhost:8000/teams', data).then((response) => {
+      if (response.status === 200) {
+        notifications.show({
+          message: 'Success! Your team has been created.',
+        })
+        form.reset()
+      }
+    })
+  }
 
   if (isLoading) {
     return (
@@ -70,7 +65,7 @@ export default function TeamCreationForm() {
     }))
 
     return (
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit(submit)}>
         <Title
           order={2}
           size="h1"
@@ -86,25 +81,31 @@ export default function TeamCreationForm() {
             placeholder="Team's name"
             name="name"
             variant="filled"
+            required={true}
             {...form.getInputProps('name')}
           />
-          <Select
-            label="First Player"
-            name="firstPlayer"
-            placeholder="Pick a player"
-            data={playerData}
-            {...form.getInputProps('firstPlayer')}
-          />
-          <Select
-            label="Second Player"
-            name="secondPlayer"
-            placeholder="Pick a player"
-            data={playerData}
-            {...form.getInputProps('secondPlayer')}
-          />
+          <Group justify="space-between" grow>
+            <Select
+              label="First Player"
+              name="firstPlayer"
+              placeholder="Pick a player"
+              data={playerData}
+              required={true}
+              {...form.getInputProps('firstPlayer')}
+            />
+
+            <Select
+              label="Second Player"
+              name="secondPlayer"
+              placeholder="Pick a player"
+              data={playerData}
+              {...form.getInputProps('secondPlayer')}
+            />
+            <Button>Create new player</Button>
+          </Group>
         </Stack>
 
-        <Group justify="center" mt="xl">
+        <Group justify="center" mt="md">
           <Button type="submit" size="md">
             Create Team
           </Button>

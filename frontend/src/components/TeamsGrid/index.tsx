@@ -6,7 +6,6 @@ import TeamCard from '../TeamCard'
 
 export default function TeamsGrid() {
   const { isLoading, data } = useTeams()
-
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">

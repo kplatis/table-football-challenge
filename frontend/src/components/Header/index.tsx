@@ -3,6 +3,7 @@
 import { Menu, Group, Center, Burger } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import classes from './Header.module.css'
+import Link from 'next/link'
 
 const links = [
   {
@@ -29,7 +30,9 @@ export function Header() {
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      <Link key={item.link} href={item.link}>
+        <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      </Link>
     ))
 
     if (menuItems) {
@@ -41,15 +44,11 @@ export function Header() {
           withinPortal
         >
           <Menu.Target>
-            <a
-              href={link.link}
-              className={classes.link}
-              onClick={(event) => event.preventDefault()}
-            >
+            <Link href={link.link} className={classes.link}>
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
               </Center>
-            </a>
+            </Link>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
         </Menu>
@@ -57,14 +56,9 @@ export function Header() {
     }
 
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
+      <Link href={link.link} key={link.label} className={classes.link}>
         {link.label}
-      </a>
+      </Link>
     )
   })
 

@@ -3,8 +3,12 @@ Test module for Player CRUD actions
 """
 
 import pytest
-from api.exceptions import PlayerDoesNotExistException, SamePlayersTeamException
-from api.teams.crud import create_team, get_teams
+from api.exceptions import (
+    PlayerDoesNotExistException,
+    SamePlayersTeamException,
+    TeamDoesNotExistException,
+)
+from api.teams.crud import create_team, get_teams, get_team_by_id
 from api.teams.models import Team
 from api.teams.schemas import TeamCreate
 
@@ -56,3 +60,24 @@ def test_team_listing_returns_all_teams(test_main_database):
 
     teams = get_teams(db=test_main_database)
     assert len(teams) == 5
+
+
+def test_team_retrieval_by_id_returns_correct_team(test_main_database):
+    """
+    Tests whether all teams are returned
+    """
+
+    team = get_team_by_id(team_id=2, db=test_main_database)
+    assert team.id == 2
+
+
+def test_team_retrieval_by_id_raises_exception_if_team_does_not_exist(
+    test_main_database,
+):
+    """
+    Tests whether the CRUD action will raise an exception if team with the given ID does
+    not exist in the db
+    """
+
+    with pytest.raises(TeamDoesNotExistException):
+        get_team_by_id(team_id=999, db=test_main_database)

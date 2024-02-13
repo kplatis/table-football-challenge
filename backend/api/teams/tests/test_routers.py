@@ -69,3 +69,29 @@ def test_team_listing_returns_all_teams(test_main_database, test_client):
     assert response.status_code == 200
     teams = response.json()
     assert len(teams) == 5
+
+
+def test_team_retrieval_by_id_returns_correct_team(test_main_database, test_client):
+    """
+    Tests router GET /teams/<ID>
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/teams/2",
+    )
+    assert response.status_code == 200
+    team = response.json()
+    assert team["id"] == 2
+
+
+def test_team_retrieval_by_id_returns_404_if_test_does_exist(
+    test_main_database, test_client
+):
+    """
+    Tests router GET /teams/<ID>
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/teams/999",
+    )
+    assert response.status_code == 404

@@ -8,6 +8,10 @@ import {
   SimpleGrid,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import {
+  validateFirstTeam,
+  validateSecondTeam,
+} from '../PlayedGameCreationForm/validation'
 
 type Props = {
   setTeamsFn: (firstTeamId: number, secondTeamId: number) => void
@@ -22,14 +26,8 @@ export default function TeamSelectionForm({ setTeamsFn }: Props) {
       secondTeamId: null,
     },
     validate: {
-      firstTeamId: (value, values) =>
-        values.secondTeamId &&
-        value === values.secondTeamId &&
-        'First and second team cannot be the same',
-      secondTeamId: (value, values) =>
-        values.firstTeamId &&
-        value === values.firstTeamId &&
-        'First and second team cannot be the same',
+      firstTeamId: validateFirstTeam,
+      secondTeamId: validateSecondTeam,
     },
   })
 

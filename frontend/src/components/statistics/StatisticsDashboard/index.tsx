@@ -2,7 +2,7 @@
 
 import { StatisticsCategory } from '@/types/statistics'
 import { Tabs, rem } from '@mantine/core'
-import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-react'
+import { IconUser, IconUsers, IconUsersGroup } from '@tabler/icons-react'
 import StatisticsTable from '../StatisticsTable'
 
 export default function StatisticsDashboard() {
@@ -17,19 +17,19 @@ export default function StatisticsDashboard() {
       <Tabs.List>
         <Tabs.Tab
           value={StatisticsCategory.All}
-          leftSection={<IconPhoto style={iconStyle} />}
+          leftSection={<IconUsersGroup style={iconStyle} />}
         >
           All
         </Tabs.Tab>
         <Tabs.Tab
           value={StatisticsCategory.Players}
-          leftSection={<IconMessageCircle style={iconStyle} />}
+          leftSection={<IconUser style={iconStyle} />}
         >
           Players
         </Tabs.Tab>
         <Tabs.Tab
           value={StatisticsCategory.Teams}
-          leftSection={<IconSettings style={iconStyle} />}
+          leftSection={<IconUsers style={iconStyle} />}
         >
           Teams
         </Tabs.Tab>

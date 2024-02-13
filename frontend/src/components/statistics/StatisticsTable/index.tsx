@@ -31,7 +31,7 @@ export default function StatisticsTable({ category }: Props) {
     ))
 
     return (
-      <Table>
+      <Table mt="lg">
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Name</Table.Th>

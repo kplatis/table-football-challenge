@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { IconChevronDown } from '@tabler/icons-react'
 
 const links = [
-  { link: '/overview', label: 'Overview' },
+  { link: '/dashboard', label: 'Dashboard' },
   {
     link: '#1',
     label: 'Teams',

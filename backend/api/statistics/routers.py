@@ -21,7 +21,7 @@ router = APIRouter()
 )
 async def get_statistics_overview_for_teams_and_players(
     category: str = Query(
-        description="Category of the item", regex="^(players|teams)$"
+        None, description="Category of the item", pattern="^(players|teams)$"
     ),
     db: Session = Depends(get_db),
 ):

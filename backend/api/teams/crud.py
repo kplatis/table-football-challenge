@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from api.exceptions import (
     PlayerDoesNotExistException,
     SamePlayersTeamException,
-    TeamDoesNotExistException
+    TeamDoesNotExistException,
 )
 from api.teams import models as teams_models, schemas as teams_schemas
 from api.players import models as players_models

@@ -4,4 +4,3 @@ export type GameCreationDataPreValidation = {
   firstTeamGoals?: number
   secondTeamGoals?: number
 }
-

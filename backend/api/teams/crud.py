@@ -3,7 +3,11 @@ CRUD definitions for Team module
 """
 
 from sqlalchemy.orm import Session
-from api.exceptions import PlayerDoesNotExistException, SamePlayersTeamException
+from api.exceptions import (
+    PlayerDoesNotExistException,
+    SamePlayersTeamException,
+    TeamDoesNotExistException,
+)
 from api.teams import models as teams_models, schemas as teams_schemas
 from api.players import models as players_models
 
@@ -43,3 +47,13 @@ def get_teams(db: Session):
     CRUD action to read all teams
     """
     return db.query(teams_models.Team).all()
+
+
+def get_team_by_id(team_id: int, db: Session):
+    """
+    CRUD action to retrieve team using its ID
+    """
+    team = db.get(teams_models.Team, team_id)
+    if team is None:
+        raise TeamDoesNotExistException
+    return team

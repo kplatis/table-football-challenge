@@ -14,7 +14,7 @@ import { useForm } from '@mantine/form'
 import axios from 'axios'
 import useTeams from '@/hooks/useTeams'
 import { validateFirstTeam, validateSecondTeam } from './validation'
-import { GameCreationSchema } from './types'
+import { GameCreationSchema } from '@/types/games'
 
 export default function PlayedGameCreationForm() {
   const { isLoading, data } = useTeams()

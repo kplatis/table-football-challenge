@@ -55,6 +55,9 @@ export default function PlayLiveGame() {
     setStep((prevStep) => prevStep + 1)
   }
 
+  /**
+   * Creates the game, if the game is not draw
+   */
   const gameFinished = () => {
     if (game.firstTeamGoals === game.secondTeamGoals) {
       notifications.show({

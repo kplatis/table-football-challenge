@@ -46,7 +46,8 @@ def calculate_stats_for_team(games: Game, team_id: int):
         stats["goals_for"] += goals_scored_in_game
         stats["goals_against"] += goals_perceived_in_game
     stats["goals_difference"] = stats["goals_for"] - stats["goals_against"]
-    win_percentage = stats["wins"] / (stats["wins"] + stats["losses"])
+    total_matches = stats["wins"] + stats["losses"]
+    win_percentage = stats["wins"] / total_matches if total_matches > 0 else 0.0
 
     stats["win_ratio"] = float(f"{win_percentage:.2f}")
     return stats
@@ -74,6 +75,7 @@ def calculate_stats_for_player(
         stats["goals_for"] += team_stats["goals_for"]
         stats["goals_against"] += team_stats["goals_against"]
         stats["goals_difference"] += team_stats["goals_difference"]
-    win_percentage = stats["wins"] / (stats["wins"] + stats["losses"])
+    total_matches = stats["wins"] + stats["losses"]
+    win_percentage = stats["wins"] / total_matches if total_matches > 0 else 0.0
     stats["win_ratio"] = float(f"{win_percentage:.2f}")
     return stats

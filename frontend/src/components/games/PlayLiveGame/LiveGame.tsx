@@ -4,9 +4,14 @@ import { FirstOrSecond, GameState } from './types'
 type Props = {
   game: GameState
   teamScoredFn: (firstOrSecond: FirstOrSecond) => void
+  gameFinishedFn: () => void
 }
 
-export default function LiveGame({ game, teamScoredFn }: Props) {
+export default function LiveGame({
+  game,
+  teamScoredFn,
+  gameFinishedFn,
+}: Props) {
   return (
     <Center>
       <Stack gap={'lg'}>
@@ -32,7 +37,7 @@ export default function LiveGame({ game, teamScoredFn }: Props) {
             </Stack>
           </Group>
         </Card>
-        <Button>Submit Game</Button>
+        <Button onClick={() => gameFinishedFn()}>Submit Game</Button>
       </Stack>
     </Center>
   )

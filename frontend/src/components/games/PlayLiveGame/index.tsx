@@ -6,6 +6,9 @@ import LiveGame from './LiveGame'
 import useTeams from '@/hooks/useTeams'
 import { Center, Loader } from '@mantine/core'
 import { FirstOrSecond, GameState } from './types'
+import { notifications } from '@mantine/notifications'
+import axios from 'axios'
+import { GameCreationSchema } from '@/types/games'
 
 export default function PlayLiveGame() {
   const { isLoading, data } = useTeams()
@@ -51,6 +54,37 @@ export default function PlayLiveGame() {
     }))
     setStep((prevStep) => prevStep + 1)
   }
+
+  const gameFinished = () => {
+    if (game.firstTeamGoals === game.secondTeamGoals) {
+      notifications.show({
+        message:
+          'A table football match cannot finish as a draw. Keep playing!',
+      })
+    } else if (game.firstTeam && game.secondTeam) {
+      const data: GameCreationSchema = {
+        first_team_id: game.firstTeam.id,
+        second_team_id: game.secondTeam.id,
+        first_team_goals: game.firstTeamGoals,
+        second_team_goals: game.secondTeamGoals,
+      }
+      axios.post('http://localhost:8000/games', data).then((response) => {
+        if (response.status === 200) {
+          notifications.show({
+            message: 'Success! Your game has been created.',
+          })
+          setGame(() => ({
+            firstTeam: undefined,
+            secondTeam: undefined,
+            firstTeamGoals: 0,
+            secondTeamGoals: 0,
+          }))
+          setStep(() => 1)
+        }
+      })
+    }
+  }
+
   if (isLoading) {
     return (
       <Center>
@@ -63,7 +97,13 @@ export default function PlayLiveGame() {
       case 1:
         return <TeamSelectionForm teams={data} setTeamsFn={setTeams} />
       case 2:
-        return <LiveGame game={game} teamScoredFn={teamScored} />
+        return (
+          <LiveGame
+            game={game}
+            teamScoredFn={teamScored}
+            gameFinishedFn={gameFinished}
+          />
+        )
       default:
         return <div>test</div>
     }

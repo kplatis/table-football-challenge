@@ -1,12 +1,13 @@
 import GamesGrid from '@/components/games/GamesGrid'
-import { Center, Stack, Title } from '@mantine/core'
+import { Stack, Title } from '@mantine/core'
 
 export default function GamesPage() {
   return (
     <Stack gap="lg">
-      <Center>
-        <Title order={1}>Games</Title>
-      </Center>
+      <Title order={1} ta="center" m="xl">
+        Games
+      </Title>
+
       <GamesGrid />
     </Stack>
   )

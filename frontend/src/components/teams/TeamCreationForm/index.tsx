@@ -9,7 +9,6 @@ import {
   Select,
   Stack,
   TextInput,
-  Title,
 } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useForm } from '@mantine/form'
@@ -84,15 +83,6 @@ export default function TeamCreationForm() {
           <PlayerCreationForm onSuccessFn={onPlayerCreated} />
         </Modal>
         <form onSubmit={form.onSubmit(submit)}>
-          <Title
-            order={2}
-            size="h1"
-            style={{ fontFamily: 'Greycliff CF, var(--mantine-font-family)' }}
-            fw={900}
-            ta="center"
-          >
-            Create a new team
-          </Title>
           <Stack h={200} bg="var(--mantine-color-body)" gap="lg">
             <TextInput
               label="Name"

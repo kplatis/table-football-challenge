@@ -10,7 +10,7 @@ export default function useStatistics(statisticsCategory: StatisticsCategory) {
     queryKey: ['statistics', statisticsCategory],
     queryFn: async (): Promise<StatisticsByTeamOrPlayer[]> => {
       const { data } = await axios.get(
-        'http://localhost:8000/statistics/overview',
+        `http://localhost:8000/statistics/overview?category=${statisticsCategory}`,
       )
       return data
     },

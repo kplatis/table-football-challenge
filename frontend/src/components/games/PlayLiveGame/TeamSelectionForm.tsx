@@ -1,4 +1,4 @@
-import { Button, Group, Select, SimpleGrid } from '@mantine/core'
+import { Button, Group, Select, SimpleGrid, Stack } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import {
   validateFirstTeam,
@@ -35,30 +35,32 @@ export default function TeamSelectionForm({ teams, setTeamsFn }: Props) {
   return (
     <>
       <form onSubmit={form.onSubmit(submit)}>
-        <SimpleGrid cols={2}>
-          <Select
-            label="First Team"
-            name="firstTeamId"
-            placeholder="Pick a team"
-            data={teamsData}
-            required={true}
-            {...form.getInputProps('firstTeamId')}
-          />
+        <Stack gap={'xl'}>
+          <SimpleGrid cols={2}>
+            <Select
+              label="First Team"
+              name="firstTeamId"
+              placeholder="Pick a team"
+              data={teamsData}
+              required={true}
+              {...form.getInputProps('firstTeamId')}
+            />
 
-          <Select
-            label="Second Team"
-            name="secondTeamId"
-            placeholder="Pick a team"
-            data={teamsData}
-            required={true}
-            {...form.getInputProps('secondTeamId')}
-          />
-        </SimpleGrid>
-        <Group justify="center" mt="md">
-          <Button type="submit" size="md">
-            Start the game!
-          </Button>
-        </Group>
+            <Select
+              label="Second Team"
+              name="secondTeamId"
+              placeholder="Pick a team"
+              data={teamsData}
+              required={true}
+              {...form.getInputProps('secondTeamId')}
+            />
+          </SimpleGrid>
+          <Group justify="center" mt="md">
+            <Button type="submit" size="md">
+              Start the game!
+            </Button>
+          </Group>
+        </Stack>
       </form>
     </>
   )

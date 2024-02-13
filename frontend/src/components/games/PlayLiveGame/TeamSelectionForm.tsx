@@ -1,25 +1,17 @@
-import useTeams from '@/hooks/useTeams'
-import {
-  Button,
-  Center,
-  Group,
-  Loader,
-  Select,
-  SimpleGrid,
-} from '@mantine/core'
+import { Button, Group, Select, SimpleGrid } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import {
   validateFirstTeam,
   validateSecondTeam,
 } from '../PlayedGameCreationForm/validation'
+import { Team } from '@/types/teams'
 
 type Props = {
+  teams: Team[]
   setTeamsFn: (firstTeamId: number, secondTeamId: number) => void
 }
 
-export default function TeamSelectionForm({ setTeamsFn }: Props) {
-  const { isLoading, data } = useTeams()
-
+export default function TeamSelectionForm({ teams, setTeamsFn }: Props) {
   const form = useForm({
     initialValues: {
       firstTeamId: null,
@@ -32,51 +24,42 @@ export default function TeamSelectionForm({ setTeamsFn }: Props) {
   })
 
   const submit = (values: any) => {
-    setTeamsFn(values.firstTeamId, values.secondTeamId)
+    setTeamsFn(parseInt(values.firstTeamId), parseInt(values.secondTeamId))
   }
 
-  if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" />
-      </Center>
-    )
-  }
-  if (data) {
-    const teamsData = data.map((team) => ({
-      value: team.id.toString(),
-      label: team.name,
-    }))
+  const teamsData = teams.map((team) => ({
+    value: team.id.toString(),
+    label: team.name,
+  }))
 
-    return (
-      <>
-        <form onSubmit={form.onSubmit(submit)}>
-          <SimpleGrid cols={2}>
-            <Select
-              label="First Team"
-              name="firstTeamId"
-              placeholder="Pick a team"
-              data={teamsData}
-              required={true}
-              {...form.getInputProps('firstTeamId')}
-            />
+  return (
+    <>
+      <form onSubmit={form.onSubmit(submit)}>
+        <SimpleGrid cols={2}>
+          <Select
+            label="First Team"
+            name="firstTeamId"
+            placeholder="Pick a team"
+            data={teamsData}
+            required={true}
+            {...form.getInputProps('firstTeamId')}
+          />
 
-            <Select
-              label="Second Team"
-              name="secondTeamId"
-              placeholder="Pick a team"
-              data={teamsData}
-              required={true}
-              {...form.getInputProps('secondTeamId')}
-            />
-          </SimpleGrid>
-          <Group justify="center" mt="md">
-            <Button type="submit" size="md">
-              Start the game!
-            </Button>
-          </Group>
-        </form>
-      </>
-    )
-  }
+          <Select
+            label="Second Team"
+            name="secondTeamId"
+            placeholder="Pick a team"
+            data={teamsData}
+            required={true}
+            {...form.getInputProps('secondTeamId')}
+          />
+        </SimpleGrid>
+        <Group justify="center" mt="md">
+          <Button type="submit" size="md">
+            Start the game!
+          </Button>
+        </Group>
+      </form>
+    </>
+  )
 }

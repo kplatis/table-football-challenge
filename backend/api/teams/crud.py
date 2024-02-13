@@ -43,3 +43,10 @@ def get_teams(db: Session):
     CRUD action to read all teams
     """
     return db.query(teams_models.Team).all()
+
+
+def get_team_by_id(team_id: int, db: Session):
+    """
+    CRUD action to retrieve team using its ID
+    """
+    return db.get(teams_models.Team, team_id)

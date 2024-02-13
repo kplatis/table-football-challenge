@@ -37,3 +37,11 @@ async def get_all_teams(db: Session = Depends(get_db)):
     Defines endpoint to get all teams
     """
     return crud.get_teams(db)
+
+
+@router.get("/{team_id}", tags=["Teams"], response_model=schemas.Team)
+async def get_team_by_id(team_id: int, db: Session = Depends(get_db)):
+    """
+    Defines endpoint to get all teams
+    """
+    return crud.get_team_by_id(team_id, db)

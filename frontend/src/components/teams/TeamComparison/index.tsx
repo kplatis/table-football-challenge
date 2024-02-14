@@ -5,6 +5,7 @@ import TeamSelectionForm from '../TeamSelectionForm'
 import { useState } from 'react'
 import useTeams from '@/hooks/useTeams'
 import { Center, Loader } from '@mantine/core'
+import StatisticsScore from '@/components/statistics/StatisticsScore'
 
 type TeamSelectioState = {
   firstTeam?: Team
@@ -43,6 +44,12 @@ export default function TeamComparison() {
           submissionButtonText="Compare!"
           setTeamsFn={setSelected}
         />
+        {selectedTeams.firstTeam && selectedTeams.secondTeam && (
+          <StatisticsScore
+            firstTeam={selectedTeams.firstTeam}
+            secondTeam={selectedTeams.secondTeam}
+          />
+        )}
       </>
     )
   }

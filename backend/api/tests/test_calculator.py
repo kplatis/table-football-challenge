@@ -1,8 +1,15 @@
+"""
+Test module for calculator.py
+"""
+
 from api.games.models import Game
-from api.statistics.calculator import calculate_stats_for_teams_and_players
+from api.calculator import calculate_stats_for_teams_and_players
 
 
 def test_calculator_for_players(test_main_database):
+    """
+    Tests the calculation of statistics for players
+    """
     games = test_main_database.query(Game).all()
     _, players = calculate_stats_for_teams_and_players(games=games)
     assert players[1]["name"] == "Player1"
@@ -39,6 +46,9 @@ def test_calculator_for_players(test_main_database):
 
 
 def test_calculator_for_teams(test_main_database):
+    """
+    Tests the calculation of statistics for teams
+    """
     games = test_main_database.query(Game).all()
     teams, _ = calculate_stats_for_teams_and_players(games=games)
 

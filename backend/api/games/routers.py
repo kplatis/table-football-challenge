@@ -2,7 +2,6 @@
 Router definition for Game module
 """
 
-from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException
 from api.calculator import calculate_stats_for_teams_and_players
@@ -13,9 +12,7 @@ from api.exceptions import (
     TeamDoesNotExistException,
 )
 from api.games import schemas as games_schemas, crud
-from api.teams import schemas as teams_schemas
-from api.players import schemas as players_schemas
-
+from api.games.converter import convert_game_model_to_schema
 
 router = APIRouter()
 
@@ -52,44 +49,7 @@ async def list_all_games(
     if with_team_stats or with_player_stats:
         teams, players = calculate_stats_for_teams_and_players(games=games)
     return games_schemas.GameListResponse(
-        games=[
-            games_schemas.Game.model_validate(
-                {
-                    **game.__dict__,
-                    "first_team": teams_schemas.Team.model_validate(
-                        {
-                            **game.first_team.__dict__,
-                            "first_player": players_schemas.Player.model_validate(
-                                game.first_team.first_player.__dict__
-                            ),
-                            "second_player": (
-                                players_schemas.Player.model_validate(
-                                    game.first_team.second_player.__dict__
-                                )
-                                if game.first_team.second_player
-                                else None
-                            ),
-                        }
-                    ),
-                    "second_team": teams_schemas.Team.model_validate(
-                        {
-                            **game.second_team.__dict__,
-                            "first_player": players_schemas.Player.model_validate(
-                                game.second_team.first_player.__dict__
-                            ),
-                            "second_player": (
-                                players_schemas.Player.model_validate(
-                                    game.second_team.second_player.__dict__
-                                )
-                                if game.second_team.second_player
-                                else None
-                            ),
-                        }
-                    ),
-                }
-            )
-            for game in games
-        ],
+        games=[convert_game_model_to_schema(game) for game in games],
         team_stats=list(teams.values()) if with_team_stats else None,
         player_stats=list(players.values()) if with_player_stats else None,
     )

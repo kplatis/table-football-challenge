@@ -2,7 +2,7 @@
 Schemas definition for Games module
 """
 
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel
 from api.teams.schemas import Team
 
@@ -43,3 +43,27 @@ class GamePartialUpdate(GameBase):
     """
 
     pass
+
+
+class Statistics(BaseModel):
+    """
+    Schema defining statistics by team or player
+    """
+
+    name: str
+    wins: int
+    losses: int
+    win_ratio: float
+    goals_for: int
+    goals_against: int
+    goals_difference: int
+
+
+class GameListResponse(BaseModel):
+    """
+    Schema definition for game lists
+    """
+
+    games: List[Game]
+    team_stats: Optional[List[Statistics]]
+    player_stats: Optional[List[Statistics]]

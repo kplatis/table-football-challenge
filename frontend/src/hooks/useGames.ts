@@ -2,11 +2,16 @@ import { Game } from '@/types/games'
 import axios from 'axios'
 import { useQuery } from 'react-query'
 
-export default function useGames() {
+export default function useGames(firstTeamId?: number, secondTeamId?: number) {
   return useQuery({
-    queryKey: 'games',
+    queryKey: ['games', firstTeamId, secondTeamId],
     queryFn: async (): Promise<Game[]> => {
-      const { data } = await axios.get('http://localhost:8000/games')
+      let url = 'http://localhost:8000/games'
+      if (firstTeamId && secondTeamId) {
+        url = `http://localhost:8000/games?versus_team_ids=${firstTeamId}&versus_team_ids=${secondTeamId}`
+      }
+
+      const { data } = await axios.get(url)
       return data
     },
   })

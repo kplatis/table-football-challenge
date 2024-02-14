@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import TeamSelectionForm from './TeamSelectionForm'
+import TeamSelectionForm from '../../teams/TeamSelectionForm'
 import LiveGame from './LiveGame'
 import useTeams from '@/hooks/useTeams'
 import { Center, Loader } from '@mantine/core'
@@ -98,7 +98,13 @@ export default function PlayLiveGame() {
   if (data) {
     switch (step) {
       case 1:
-        return <TeamSelectionForm teams={data} setTeamsFn={setTeams} />
+        return (
+          <TeamSelectionForm
+            teams={data}
+            setTeamsFn={setTeams}
+            submissionButtonText="Start the Game!"
+          />
+        )
       case 2:
         return (
           <LiveGame

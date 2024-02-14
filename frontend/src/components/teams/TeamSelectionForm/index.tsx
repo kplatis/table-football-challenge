@@ -3,15 +3,20 @@ import { useForm } from '@mantine/form'
 import {
   validateFirstTeam,
   validateSecondTeam,
-} from '../PlayedGameCreationForm/validation'
+} from '../../games/PlayedGameCreationForm/validation'
 import { Team } from '@/types/teams'
 
 type Props = {
   teams: Team[]
+  submissionButtonText: string
   setTeamsFn: (firstTeamId: number, secondTeamId: number) => void
 }
 
-export default function TeamSelectionForm({ teams, setTeamsFn }: Props) {
+export default function TeamSelectionForm({
+  teams,
+  submissionButtonText,
+  setTeamsFn,
+}: Props) {
   const form = useForm({
     initialValues: {
       firstTeamId: null,
@@ -57,7 +62,7 @@ export default function TeamSelectionForm({ teams, setTeamsFn }: Props) {
           </SimpleGrid>
           <Group justify="center" mt="md">
             <Button type="submit" size="md">
-              Start the game!
+              {submissionButtonText}
             </Button>
           </Group>
         </Stack>

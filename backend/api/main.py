@@ -8,7 +8,8 @@ from api.database import Base, engine
 from api.teams import routers as team_routers
 from api.players import routers as players_routers
 from api.games import routers as games_routers
-from api.statistics import routers as stats_routers
+
+# from api.statistics import routers as stats_routers
 
 
 Base.metadata.create_all(bind=engine)
@@ -45,4 +46,4 @@ app.add_middleware(
 app.include_router(players_routers.router, prefix="/players")
 app.include_router(team_routers.router, prefix="/teams")
 app.include_router(games_routers.router, prefix="/games")
-app.include_router(stats_routers.router, prefix="/statistics")
+# app.include_router(stats_routers.router, prefix="/statistics")

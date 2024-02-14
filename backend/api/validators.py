@@ -1,11 +1,15 @@
-
+"""
+Defines validators for query parameters
+"""
 
 from typing import List, Optional
-
 from fastapi import HTTPException
 
 
 def validate_versus_team_ids(versus_team_ids: Optional[List[int]] = None):
+    """
+    Validates the versus team ids, if provided
+    """
     if versus_team_ids is not None:
         if len(versus_team_ids) != 2:
             raise HTTPException(

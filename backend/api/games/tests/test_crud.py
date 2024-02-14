@@ -13,6 +13,26 @@ from api.games.models import Game
 from api.games.schemas import GameCreate, GamePartialUpdate
 
 
+def test_games_listing_returns_all_games(test_main_database):
+    """
+    Tests whether all games are returned
+    """
+
+    games = list_games(db=test_main_database)
+    assert len(games) == 7
+
+
+def test_games_listing_returns_all_games_with_filters(test_main_database):
+    """
+    Tests whether all games are returned when applying versus filter
+    """
+
+    games = list_games(
+        db=test_main_database, first_team_id_versus=1, second_team_id_versus=2
+    )
+    assert len(games) == 3
+
+
 def test_create_game_success(test_main_database):
     """
     Tests the CRUD action to create a new game
@@ -63,15 +83,6 @@ def test_game_creation_throws_exception_if_second_team_does_not_exist(
 
     with pytest.raises(TeamDoesNotExistException):
         create_game(db=test_main_database, game=game_data)
-
-
-def test_games_listing_returns_all_games(test_main_database):
-    """
-    Tests whether all games are returned
-    """
-
-    games = list_games(db=test_main_database)
-    assert len(games) == 9
 
 
 def test_game_patching_successfully_updates_the_game(test_main_database):

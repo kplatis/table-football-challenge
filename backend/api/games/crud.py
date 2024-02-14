@@ -39,10 +39,29 @@ def create_game(db: Session, game: schemas.GameCreate):
     return db_game
 
 
-def list_games(db: Session):
+def list_games(
+    db: Session, first_team_id_versus: int = None, second_team_id_versus: int = None
+):
     """
     CRUD action to list all games
     """
+    # if versus teams are provided
+    if first_team_id_versus is not None and second_team_id_versus is not None:
+        return (
+            db.query(game_models.Game)
+            .filter(
+                (
+                    (game_models.Game.first_team_id == first_team_id_versus)
+                    & (game_models.Game.second_team_id == second_team_id_versus)
+                )
+                | (
+                    (game_models.Game.first_team_id == second_team_id_versus)
+                    & (game_models.Game.second_team_id == first_team_id_versus)
+                )
+            )
+            .all()
+        )
+
     return db.query(game_models.Game).all()
 
 

@@ -3,7 +3,7 @@ Test module for calculator.py
 """
 
 from api.games.models import Game
-from api.calculator import calculate_stats_for_teams_and_players
+from api.statistics.calculator import calculate_stats_for_teams_and_players
 
 
 def test_calculator_for_players(test_main_database):

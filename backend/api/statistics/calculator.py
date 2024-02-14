@@ -1,5 +1,5 @@
 """
-Calculator functions for Statistics module
+Statitstic calculator functions
 """
 
 from typing import List, Dict
@@ -7,6 +7,9 @@ from api.games.models import Game
 
 
 def initialize_stats(name: str):
+    """
+    Initializes the statistics dictionary
+    """
     return {
         name: name,
         "wins": 0,
@@ -21,6 +24,9 @@ def initialize_stats(name: str):
 def add_stats(
     stats: Dict[int, Dict], team_won: bool, goals_scored: int, goals_perceived: int
 ):
+    """
+    Adds the statistics to the existing dictionary based on whether the team won or not
+    """
     total_matches = stats["wins"] + stats["losses"] + 1
     wins = stats["wins"] + 1 if team_won else stats["wins"]
     losses = stats["losses"] + 1 if not team_won else stats["losses"]
@@ -40,7 +46,7 @@ def add_stats(
     }
 
 
-def calculate_stats_for_team(
+def update_stats_of_team(
     name: str,
     teams_stats: Dict[int, Dict],
     team_id: int,
@@ -48,7 +54,9 @@ def calculate_stats_for_team(
     goals_scored: int,
     goals_perceived: int,
 ):
-
+    """
+    Calculates the statistics of a single team
+    """
     # if team not in the dict, initialize
     if team_id not in teams_stats:
         teams_stats[team_id] = initialize_stats(name)
@@ -60,7 +68,7 @@ def calculate_stats_for_team(
     return teams_stats
 
 
-def calculate_stats_for_player(
+def update_stats_of_player(
     name: str,
     players_stats: Dict[int, Dict],
     player_id: int,
@@ -68,6 +76,9 @@ def calculate_stats_for_player(
     goals_scored: int,
     goals_perceived: int,
 ):
+    """
+    Calculates the statistics of a single player
+    """
     # calculating stats for first player of first team
     if player_id not in players_stats:
         players_stats[player_id] = initialize_stats(name)
@@ -81,7 +92,9 @@ def calculate_stats_for_player(
 
 
 def calculate_stats_for_teams_and_players(games: List[Game]):
-
+    """
+    Given a list of games, calculates and returns the statistics for the teams and players that took part in the games
+    """
     teams = {}
     players = {}
     for game in games:
@@ -95,7 +108,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
         away_team_won = home_team_goals < away_team_goals
 
         # calculating stats for home team
-        teams = calculate_stats_for_team(
+        teams = update_stats_of_team(
             game.first_team.name,
             teams,
             game.first_team_id,
@@ -105,7 +118,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
         )
 
         # calculating stats for away team
-        teams = calculate_stats_for_team(
+        teams = update_stats_of_team(
             game.second_team.name,
             teams,
             game.second_team_id,
@@ -118,7 +131,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
 
         # calculating stats for first player of first team
 
-        players = calculate_stats_for_player(
+        players = update_stats_of_player(
             game.first_team.first_player.name,
             players,
             game.first_team.first_player_id,
@@ -129,7 +142,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
 
         # calculating stats for second player of first team (if exists)
         if game.first_team.second_player_id:
-            players = calculate_stats_for_player(
+            players = update_stats_of_player(
                 game.first_team.second_player.name,
                 players,
                 game.first_team.second_player_id,
@@ -141,7 +154,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
         ###
 
         # calculating stats for first player of second team
-        players = calculate_stats_for_player(
+        players = update_stats_of_player(
             game.second_team.first_player.name,
             players,
             game.second_team.first_player_id,
@@ -152,7 +165,7 @@ def calculate_stats_for_teams_and_players(games: List[Game]):
 
         # calculating stats for second player of second team (if exists)
         if game.second_team.second_player_id:
-            players = calculate_stats_for_player(
+            players = update_stats_of_player(
                 game.second_team.second_player.name,
                 players,
                 game.second_team.second_player_id,

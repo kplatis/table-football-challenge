@@ -12,6 +12,7 @@ from api.exceptions import (
     TeamDoesNotExistException,
 )
 from api.games import schemas, crud
+from api.validators import validate_versus_team_ids
 
 router = APIRouter()
 
@@ -41,15 +42,11 @@ async def list_all_games(
     """
     Defines endpoint to list all games
     """
-    if versus_team_ids is not None:
-        if len(versus_team_ids) != 2:
-            raise HTTPException(
-                status_code=400, detail="Two team IDs must be provided."
-            )
-        first_team_id_versus, second_team_id_versus = versus_team_ids
-    else:
-        first_team_id_versus, second_team_id_versus = None, None
+    # validates the team_id_versus parameters
 
+    first_team_id_versus, second_team_id_versus = validate_versus_team_ids(
+        versus_team_ids
+    )
     return crud.list_games(
         db=db,
         first_team_id_versus=first_team_id_versus,

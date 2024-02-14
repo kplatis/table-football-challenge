@@ -2,9 +2,9 @@
 Router definition for Game module
 """
 
-from typing import List
+from typing import List, Optional
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from api.dependencies import get_db
 from api.exceptions import (
     GameDoesNotExistException,
@@ -12,6 +12,7 @@ from api.exceptions import (
     TeamDoesNotExistException,
 )
 from api.games import schemas, crud
+from api.validators import validate_versus_team_ids
 
 router = APIRouter()
 
@@ -34,12 +35,23 @@ async def create_new_game(game: schemas.GameCreate, db: Session = Depends(get_db
 
 
 @router.get("", tags=["Games"], response_model=List[schemas.Game])
-async def list_all_games(db: Session = Depends(get_db)):
+async def list_all_games(
+    versus_team_ids: Optional[List[int]] = Query(None, description="List of team IDs"),
+    db: Session = Depends(get_db),
+):
     """
     Defines endpoint to list all games
     """
+    # validates the team_id_versus parameters
 
-    return crud.list_games(db)
+    first_team_id_versus, second_team_id_versus = validate_versus_team_ids(
+        versus_team_ids
+    )
+    return crud.list_games(
+        db=db,
+        first_team_id_versus=first_team_id_versus,
+        second_team_id_versus=second_team_id_versus,
+    )
 
 
 @router.patch("/{game_id}", tags=["Games"], response_model=schemas.Game)

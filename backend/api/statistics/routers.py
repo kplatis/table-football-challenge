@@ -6,10 +6,9 @@ from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, Query
 from api.dependencies import get_db
-from api.statistics.crud import (
-    get_statistics_dictionary_of_all_teams,
-    get_statistics_of_all_players,
-)
+from api.games.crud import list_games
+from api.statistics.calculator import calculate_stats_for_teams_and_players
+
 from api.statistics.schemas import StatisticsByTeamOrPlayer
 
 
@@ -28,16 +27,12 @@ async def get_statistics_overview_for_teams_and_players(
     """
     Endpoint to retrieve statistics overview for teams and players
     """
-    # retrieve the statistics dictionary of all teams
-    team_ids_to_statistics = get_statistics_dictionary_of_all_teams(db)
-    # retrieve the statistics list of all players
-    player_statistics = get_statistics_of_all_players(
-        team_ids_to_stats=team_ids_to_statistics, db=db
-    )
+    games = list_games(db=db)
+    teams, players = calculate_stats_for_teams_and_players(games)
     if category == "players":
-        response = player_statistics
+        response = list(players.values())
     elif category == "teams":
-        response = list(team_ids_to_statistics.values())
+        response = list(teams.values())
     else:
-        response = list(team_ids_to_statistics.values()) + player_statistics
+        response = list(teams.values()) + list(players.values())
     return [StatisticsByTeamOrPlayer(**response) for response in response]

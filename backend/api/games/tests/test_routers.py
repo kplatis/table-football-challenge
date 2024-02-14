@@ -3,6 +3,60 @@ Test module for Games routers
 """
 
 
+def test_game_listing_returns_all_games(test_main_database, test_client):
+    """
+    Tests router GET /games
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/games",
+    )
+    assert response.status_code == 200
+    teams = response.json()
+    assert len(teams) == 7
+
+
+def test_game_listing_returns_all_filtered_versus(test_main_database, test_client):
+    """
+    Tests router GET /games
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/games?versus_team_ids=3&versus_team_ids=4",
+    )
+    assert response.status_code == 200
+    teams = response.json()
+    assert len(teams) == 4
+
+
+def test_game_listing_returns_correct_filtered_versus_if_two_teams_did_not_play(
+    test_main_database, test_client
+):
+    """
+    Tests router GET /games
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/games?versus_team_ids=1&versus_team_ids=4",
+    )
+    assert response.status_code == 200
+    teams = response.json()
+    assert len(teams) == 0
+
+
+def test_game_listing_returns_400_if_only_one_team_provided_in_versus(
+    test_main_database, test_client
+):
+    """
+    Tests router GET /games
+    """
+    # pylint: disable=unused-argument
+    response = test_client.get(
+        "/games?versus_team_ids=1",
+    )
+    assert response.status_code == 400
+
+
 def test_successful_game_creation(test_main_database, test_client):
     """
     Tests router POST /games
@@ -56,19 +110,6 @@ def test_game_creation_throws_400_if_second_team_does_not_exist(
         json={"first_team_id": 1, "second_team_id": 999},
     )
     assert response.status_code == 400
-
-
-def test_game_listing_returns_all_games(test_main_database, test_client):
-    """
-    Tests router GET /games
-    """
-    # pylint: disable=unused-argument
-    response = test_client.get(
-        "/games",
-    )
-    assert response.status_code == 200
-    teams = response.json()
-    assert len(teams) == 8
 
 
 def test_game_partial_update_returns_200_if_correct(test_main_database, test_client):

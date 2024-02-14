@@ -11,7 +11,7 @@ def initialize_stats(name: str):
     Initializes the statistics dictionary
     """
     return {
-        name: name,
+        "name": name,
         "wins": 0,
         "losses": 0,
         "win_ratio": 0.0,

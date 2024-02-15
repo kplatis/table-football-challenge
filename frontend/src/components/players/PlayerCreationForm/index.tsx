@@ -13,7 +13,10 @@ export default function PlayerCreationForm({ onSuccessFn }: Props) {
       name: '',
     },
     validate: {
-      name: (value) => value.trim().length < 2,
+      name: (value) =>
+        value.trim().length < 2
+          ? 'Name must be at least 2 characters long.'
+          : null,
     },
   })
 
@@ -42,12 +45,13 @@ export default function PlayerCreationForm({ onSuccessFn }: Props) {
           name="name"
           variant="filled"
           required={true}
+          data-testid="name-input"
           {...form.getInputProps('name')}
         />
       </Stack>
 
       <Group justify="center" mt="md">
-        <Button type="submit" size="md">
+        <Button type="submit" size="md" data-testid="create-player-button">
           Create player
         </Button>
       </Group>

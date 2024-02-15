@@ -37,7 +37,7 @@ describe('PlayedGameCreationForm', () => {
     expect(screen.queryByTestId('second-team-select')).toBeInTheDocument()
     expect(screen.queryByTestId('first-team-goals-input')).toBeInTheDocument()
     expect(screen.queryByTestId('second-team-goals-input')).toBeInTheDocument()
-    expect(screen.queryByTestId('create-team-button')).toBeInTheDocument()
+    expect(screen.queryByTestId('create-game-button')).toBeInTheDocument()
   })
 
   test('submits form data when submitted', async () => {
@@ -68,7 +68,7 @@ describe('PlayedGameCreationForm', () => {
     })
 
     // Submit the form
-    fireEvent.click(screen.getByTestId('create-team-button'))
+    fireEvent.click(screen.getByTestId('create-game-button'))
 
     // Check if the axios post call was made
     expect(mAxiosPost).toHaveBeenCalledWith('http://localhost:8000/games', {

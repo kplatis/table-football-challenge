@@ -11,7 +11,6 @@ module.exports = {
     verbose: true,
     transformIgnorePatterns: ['<rootDir>/node_modules/'],
     moduleDirectories: ['node_modules', '<rootDir>/'],    
-    maxWorkers: '50%',
     moduleNameMapper: {
       '^@/(.*)$': '<rootDir>/src/$1',
       "\\.css$": "identity-obj-proxy",

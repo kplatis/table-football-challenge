@@ -106,8 +106,8 @@ export default function PlayedGameCreationForm() {
             />
           </SimpleGrid>
           <Group justify="center" mt="md">
-            <Button type="submit" size="md" data-testid="create-team-button">
-              Create Team
+            <Button type="submit" size="md" data-testid="create-game-button">
+              Create Game
             </Button>
           </Group>
         </form>

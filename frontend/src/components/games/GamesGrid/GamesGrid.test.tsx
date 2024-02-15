@@ -45,17 +45,25 @@ describe('GamesGrid component', () => {
     expect(screen.getAllByTestId('game-card')).toHaveLength(mockGames.length)
   })
 
-  //   test('renders null when data is not available', () => {
+  test('renders null when data is not available', () => {
+    jest
+      .spyOn(require('@/hooks/useGames'), 'default')
+      .mockImplementation(() => ({
+        isLoading: false,
+        data: null,
+      }))
 
-  //     // Render the GamesGrid component
-  //     render(
-  //       <MantineProvider defaultColorScheme="dark">
-  //         <GamesGrid />
-  //       </MantineProvider>,
-  //     )
+    // Render the GamesGrid component
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider defaultColorScheme="dark">
+          <GamesGrid />
+        </MantineProvider>
+      </QueryClientProvider>,
+    )
 
-  //     // Expect null to be returned
-  //     expect(screen.queryByTestId('loader')).toBeNull()
-  //     expect(screen.queryByTestId('game-card')).toBeNull()
-  //   })
+    // Expect null to be returned
+    expect(screen.queryByTestId('loader')).toBeNull()
+    expect(screen.queryByTestId('game-card')).toBeNull()
+  })
 })

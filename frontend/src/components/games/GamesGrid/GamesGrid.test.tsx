@@ -3,9 +3,7 @@ import { render, screen } from '@testing-library/react'
 import GamesGrid from '.'
 import { MantineProvider } from '@mantine/core'
 import { mockGames } from '@/__tests__/mockData/games'
-import { QueryClient, QueryClientProvider } from 'react-query'
-
-const queryClient = new QueryClient()
+import Providers from '@/components/Providers'
 
 describe('GamesGrid component', () => {
   test('renders loader when data is loading', () => {
@@ -35,11 +33,9 @@ describe('GamesGrid component', () => {
       }))
 
     render(
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider defaultColorScheme="dark">
-          <GamesGrid />
-        </MantineProvider>
-      </QueryClientProvider>,
+      <Providers>
+        <GamesGrid />
+      </Providers>,
     )
 
     expect(screen.getAllByTestId('game-card')).toHaveLength(mockGames.length)
@@ -55,11 +51,9 @@ describe('GamesGrid component', () => {
 
     // Render the GamesGrid component
     render(
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider defaultColorScheme="dark">
-          <GamesGrid />
-        </MantineProvider>
-      </QueryClientProvider>,
+      <Providers>
+        <GamesGrid />
+      </Providers>,
     )
 
     // Expect null to be returned

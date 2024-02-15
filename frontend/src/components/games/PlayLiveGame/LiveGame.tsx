@@ -15,7 +15,7 @@ export default function LiveGame({
   return (
     <Center>
       <Stack gap={'lg'}>
-        <Card withBorder radius={'md'} p={'xl'} mt={'xl'}>
+        <Card withBorder radius={'md'} p={'xl'} mt={'xl'} data-testid="live-game-card">
           <Group>
             <Stack gap={'lg'}>
               <Title order={2}>{game.firstTeam?.name}</Title>
@@ -37,7 +37,7 @@ export default function LiveGame({
             </Stack>
           </Group>
         </Card>
-        <Button onClick={() => gameFinishedFn()}>Submit Game</Button>
+        <Button onClick={() => gameFinishedFn()} data-testid="submit-game-button">Submit Game</Button>
       </Stack>
     </Center>
   )

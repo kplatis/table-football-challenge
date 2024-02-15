@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 
-import { render, screen, fireEvent } from '@testing-library/react'
-import axios from 'axios'
+import { render, screen } from '@testing-library/react'
 import PlayLiveGame from '../PlayLiveGame'
 import Providers from '@/components/Providers'
 import { mockTeams } from '@/__tests__/mockData/teams'

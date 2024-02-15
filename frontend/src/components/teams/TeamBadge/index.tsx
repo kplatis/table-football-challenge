@@ -6,7 +6,7 @@ import classes from './TeamBadge.module.css'
 
 type Props = {
   firstPlayer: Player
-  secondPlayer?: Player
+  secondPlayer: Player | null
 }
 
 export default function TeamBadge({ firstPlayer, secondPlayer }: Props) {

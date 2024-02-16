@@ -67,7 +67,7 @@ export default function TeamCreationForm() {
   if (isLoading) {
     return (
       <Center>
-        <Loader color="blue" />
+        <Loader color="blue" data-testid="loader" />
       </Center>
     )
   }
@@ -90,6 +90,7 @@ export default function TeamCreationForm() {
               name="name"
               variant="filled"
               required={true}
+              data-testid="name-input"
               {...form.getInputProps('name')}
             />
             <Group justify="space-between">
@@ -99,6 +100,7 @@ export default function TeamCreationForm() {
                 placeholder="Pick a player"
                 data={playerData}
                 required={true}
+                data-testid="first-player-select"
                 {...form.getInputProps('firstPlayer')}
               />
 
@@ -107,15 +109,22 @@ export default function TeamCreationForm() {
                 name="secondPlayer"
                 placeholder="Pick a player"
                 data={playerData}
+                data-testid="second-player-select"
                 {...form.getInputProps('secondPlayer')}
               />
 
-              <Button onClick={open}>Create new player</Button>
+              <Button onClick={open} data-testid="create-new-player-button">
+                Create new player
+              </Button>
             </Group>
           </Stack>
 
           <Group justify="center" mt="md">
-            <Button type="submit" size="md">
+            <Button
+              type="submit"
+              size="md"
+              data-testid="create-new-team-button"
+            >
               Create Team
             </Button>
           </Group>

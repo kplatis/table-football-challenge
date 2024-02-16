@@ -42,17 +42,15 @@ export default function GameCard({ game }: Props) {
                 secondPlayer={game.first_team.second_player}
               />
             </div>
-            {game.second_team && (
-              <div>
-                <Text fz="md" mb={6}>
-                  {game.second_team.name}
-                </Text>
-                <TeamBadge
-                  firstPlayer={game.second_team.first_player}
-                  secondPlayer={game.second_team.second_player}
-                />
-              </div>
-            )}
+            <div>
+              <Text fz="md" mb={6}>
+                {game.second_team.name}
+              </Text>
+              <TeamBadge
+                firstPlayer={game.second_team.first_player}
+                secondPlayer={game.second_team.second_player}
+              />
+            </div>
           </Stack>
         </div>
       </Group>

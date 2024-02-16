@@ -13,7 +13,7 @@ export default function StatisticsTable({ category }: Props) {
   if (isLoading) {
     return (
       <Center>
-        <Loader color="blue" />
+        <Loader color="blue" data-testid="loader" />
       </Center>
     )
   }
@@ -31,7 +31,7 @@ export default function StatisticsTable({ category }: Props) {
     ))
 
     return (
-      <Table mt="lg">
+      <Table mt="lg" data-test-id="statistics-table">
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Name</Table.Th>

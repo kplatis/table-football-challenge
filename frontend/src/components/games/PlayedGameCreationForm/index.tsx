@@ -55,7 +55,7 @@ export default function PlayedGameCreationForm() {
 
   if (isLoading) {
     return (
-      <Center>
+      <Center data-testid="loader">
         <Loader color="blue" />
       </Center>
     )
@@ -71,6 +71,7 @@ export default function PlayedGameCreationForm() {
         <form onSubmit={form.onSubmit(submit)}>
           <SimpleGrid cols={2}>
             <Select
+              data-testid="first-team-select"
               label="First Team"
               name="firstTeamId"
               placeholder="Pick a team"
@@ -79,6 +80,7 @@ export default function PlayedGameCreationForm() {
               {...form.getInputProps('firstTeamId')}
             />
             <NumberInput
+              data-testid="first-team-goals-input"
               label="First Team Goals"
               defaultValue={0}
               required={true}
@@ -86,6 +88,7 @@ export default function PlayedGameCreationForm() {
               {...form.getInputProps('firstTeamGoals')}
             />
             <Select
+              data-testid="second-team-select"
               label="Second Team"
               name="secondTeamId"
               placeholder="Pick a team"
@@ -94,6 +97,7 @@ export default function PlayedGameCreationForm() {
               {...form.getInputProps('secondTeamId')}
             />
             <NumberInput
+              data-testid="second-team-goals-input"
               label="Second Team Goals"
               defaultValue={0}
               required={true}
@@ -102,8 +106,8 @@ export default function PlayedGameCreationForm() {
             />
           </SimpleGrid>
           <Group justify="center" mt="md">
-            <Button type="submit" size="md">
-              Create Team
+            <Button type="submit" size="md" data-testid="create-game-button">
+              Create Game
             </Button>
           </Group>
         </form>

@@ -10,7 +10,7 @@ type TeamCardProps = {
   id: number
   name: string
   firstPlayer: Player
-  secondPlayer?: Player
+  secondPlayer: Player | null
 }
 
 export default function TeamCard({

@@ -9,7 +9,7 @@ export default function TeamsGrid() {
   if (isLoading) {
     return (
       <Center>
-        <Loader color="blue" />
+        <Loader color="blue" data-testid="loader" />
       </Center>
     )
   }

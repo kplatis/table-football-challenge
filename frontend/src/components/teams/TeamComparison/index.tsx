@@ -33,7 +33,7 @@ export default function TeamComparison() {
   if (isLoading) {
     return (
       <Center>
-        <Loader color="blue" />
+        <Loader color="blue" data-testid="loader" />
       </Center>
     )
   }

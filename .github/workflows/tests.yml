@@ -23,4 +23,24 @@ jobs:
       - name: Run unit tests
         working-directory: backend/api
         run: pytest
+
+  run-frontend-unit-tests:
+    name: Run frontend unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
   
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+  
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install
+  
+      - name: Run unit tests
+        working-directory: frontend
+        run: npm run-script test

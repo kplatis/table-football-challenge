@@ -8,7 +8,7 @@ type Props = {
 
 export default function GameCard({ game }: Props) {
   return (
-    <Card withBorder p="xl" radius="md">
+    <Card withBorder p="xl" radius="md" data-testid="game-card">
       <Group>
         <div>
           <Stack>

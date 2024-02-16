@@ -39,7 +39,7 @@ export default function TeamSelectionForm({
 
   return (
     <>
-      <form onSubmit={form.onSubmit(submit)}>
+      <form onSubmit={form.onSubmit(submit)} data-testid="team-selection-form">
         <Stack gap={'xl'}>
           <SimpleGrid cols={2}>
             <Select
@@ -48,6 +48,7 @@ export default function TeamSelectionForm({
               placeholder="Pick a team"
               data={teamsData}
               required={true}
+              data-testid="first-team-select"
               {...form.getInputProps('firstTeamId')}
             />
 
@@ -57,11 +58,12 @@ export default function TeamSelectionForm({
               placeholder="Pick a team"
               data={teamsData}
               required={true}
+              data-testid="second-team-select"
               {...form.getInputProps('secondTeamId')}
             />
           </SimpleGrid>
           <Group justify="center" mt="md">
-            <Button type="submit" size="md">
+            <Button type="submit" size="md" data-testid="teams-selected-button">
               {submissionButtonText}
             </Button>
           </Group>

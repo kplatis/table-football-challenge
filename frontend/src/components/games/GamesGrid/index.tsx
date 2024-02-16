@@ -9,7 +9,7 @@ export default function GamesGrid() {
 
   if (isLoading) {
     return (
-      <Center>
+      <Center data-testid="loader">
         <Loader color="blue" />
       </Center>
     )
@@ -23,5 +23,5 @@ export default function GamesGrid() {
       </SimpleGrid>
     )
   }
-  return <div>Something went wrong</div>
+  return null
 }

@@ -11,7 +11,7 @@ export const mockStatistics = [
   {
     name: 'team2',
     wins: 3,
-    losses: 1,
+    losses: 2,
     win_ratio: 0.75,
     goals_for: 12,
     goals_against: 8,

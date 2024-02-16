@@ -17,7 +17,7 @@ export default function StatisticsScore({ firstTeam, secondTeam }: Props) {
   if (isLoading) {
     return (
       <Center>
-        <Loader />
+        <Loader color="blue" data-testid="loader" />
       </Center>
     )
   }
@@ -38,7 +38,7 @@ export default function StatisticsScore({ firstTeam, secondTeam }: Props) {
         sentence = `${firstTeam.name} and ${secondTeam.name} are draw: ${wins} - ${losses}`
       }
     } else {
-      sentence = 'There are no games between the two team'
+      sentence = 'There are no games between the two teams'
     }
 
     return (

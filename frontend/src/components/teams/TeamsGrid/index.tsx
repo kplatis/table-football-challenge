@@ -1,7 +1,7 @@
 'use client'
 
 import useTeams from '@/hooks/useTeams'
-import {  SimpleGrid } from '@mantine/core'
+import { SimpleGrid } from '@mantine/core'
 import TeamCard from '../TeamCard'
 import Loader from '@/components/layout/Loader'
 import MessageWithButton from '@/components/common/MessageWithButton'

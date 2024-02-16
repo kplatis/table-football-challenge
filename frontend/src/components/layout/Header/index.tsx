@@ -68,7 +68,7 @@ export function Header() {
   return (
     <header className={classes.header}>
       <div className={classes.inner}>
-        <div>Challenge</div>
+        <div>Table Football Challenge</div>
         <Group gap={10} visibleFrom="sm">
           {items}
         </Group>

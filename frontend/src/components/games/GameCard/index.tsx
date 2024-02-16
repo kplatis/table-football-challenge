@@ -1,6 +1,6 @@
 import { Game } from '@/types/games'
-import { Card, Group, Text, Stack } from '@mantine/core'
-import TeamBadge from '@/components/teams/TeamBadge'
+import { Card, Group, Text, Stack, Center, Title } from '@mantine/core'
+import PlayerBadge from '@/components/players/PlayerBadge'
 
 type Props = {
   game: Game
@@ -8,52 +8,44 @@ type Props = {
 
 export default function GameCard({ game }: Props) {
   return (
-    <Card withBorder p="xl" radius="md" data-testid="game-card">
-      <Group>
-        <div>
+    <Card withBorder p="lg" radius="md" data-testid="game-card">
+      <Center>
+        <Group justify="space-between" gap="sm">
           <Stack>
-            <Group justify="center" gap="lg" grow>
-              <Stack>
-                <Text size="xl" fw={700} ta={'center'}>
-                  {game.first_team.name}
-                </Text>
-                <Text size="lg" ta={'center'}>
-                  {game.first_team_goals}
-                </Text>
-              </Stack>
-              <Text size="xl" fw={700} ta={'center'}>
-                vs
-              </Text>
-              <Stack>
-                <Text size="xl" fw={700} ta={'center'}>
-                  {game.second_team.name}
-                </Text>
-                <Text size="lg" ta={'center'}>
-                  {game.second_team_goals}
-                </Text>
-              </Stack>
-            </Group>
-            <div>
-              <Text fz="md" mb={6}>
-                {game.first_team.name}
-              </Text>
-              <TeamBadge
-                firstPlayer={game.first_team.first_player}
-                secondPlayer={game.first_team.second_player}
-              />
-            </div>
-            <div>
-              <Text fz="md" mb={6}>
-                {game.second_team.name}
-              </Text>
-              <TeamBadge
-                firstPlayer={game.second_team.first_player}
-                secondPlayer={game.second_team.second_player}
-              />
-            </div>
+            <Title order={3} fw={700} ta={'center'}>
+              {game.first_team.name}
+            </Title>
+            <Title order={4} fw={700} ta={'center'}>
+              {game.first_team_goals}
+            </Title>
+
+            <Stack mt="md">
+              <PlayerBadge name={game.first_team.first_player.name} />
+              {game.first_team.second_player && (
+                <PlayerBadge name={game.first_team.second_player.name} />
+              )}
+            </Stack>
           </Stack>
-        </div>
-      </Group>
+          <Text size="xl" fw={700} ta={'center'}>
+            vs
+          </Text>
+          <Stack>
+            <Title order={3} fw={700} ta={'center'}>
+              {game.second_team.name}
+            </Title>
+            <Title order={4} fw={700} ta={'center'}>
+              {game.second_team_goals}
+            </Title>
+
+            <Stack mt="md">
+              <PlayerBadge name={game.second_team.first_player.name} />
+              {game.second_team.second_player && (
+                <PlayerBadge name={game.second_team.second_player.name} />
+              )}
+            </Stack>
+          </Stack>
+        </Group>
+      </Center>
     </Card>
   )
 }

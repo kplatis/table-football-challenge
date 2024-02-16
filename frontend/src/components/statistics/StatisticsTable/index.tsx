@@ -1,10 +1,10 @@
 'use client'
 
+import MessageWithButton from '@/components/common/MessageWithButton'
 import Loader from '@/components/layout/Loader'
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
-import { Table, Text } from '@mantine/core'
-import Link from 'next/link'
+import { Table } from '@mantine/core'
 
 type Props = {
   category: StatisticsCategory
@@ -17,11 +17,11 @@ export default function StatisticsTable({ category }: Props) {
   }
   if (data && data.length == 0) {
     return (
-      <Text m="xl" ta="center">
-        There are no games played yet.{' '}
-        <Link href="/games/create">Play a game</Link> in order to access
-        statistics
-      </Text>
+      <MessageWithButton
+        message="There are no games created yet"
+        buttonMessage="Create a new game"
+        buttonUrl="/games/create"
+      />
     )
   }
 

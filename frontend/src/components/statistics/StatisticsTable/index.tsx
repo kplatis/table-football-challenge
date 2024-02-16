@@ -3,7 +3,8 @@
 import Loader from '@/components/layout/Loader'
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
-import { Table } from '@mantine/core'
+import { Table, Text } from '@mantine/core'
+import Link from 'next/link'
 
 type Props = {
   category: StatisticsCategory
@@ -14,6 +15,16 @@ export default function StatisticsTable({ category }: Props) {
   if (isLoading) {
     return <Loader />
   }
+  if (data && data.length == 0) {
+    return (
+      <Text m="xl" ta="center">
+        There are no games played yet.{' '}
+        <Link href="/games/create">Play a game</Link> in order to access
+        statistics
+      </Text>
+    )
+  }
+
   if (data) {
     const rows = data.map((statistics) => (
       <Table.Tr key={statistics.name}>

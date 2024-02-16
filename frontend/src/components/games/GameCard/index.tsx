@@ -26,7 +26,7 @@ export default function GameCard({ game }: Props) {
               </Text>
               <Stack>
                 <Text size="xl" fw={700} ta={'center'}>
-                  {game.second_team?.name}
+                  {game.second_team.name}
                 </Text>
                 <Text size="lg" ta={'center'}>
                   {game.second_team_goals}
@@ -45,7 +45,7 @@ export default function GameCard({ game }: Props) {
             {game.second_team && (
               <div>
                 <Text fz="md" mb={6}>
-                  {game.second_team?.name}
+                  {game.second_team.name}
                 </Text>
                 <TeamBadge
                   firstPlayer={game.second_team.first_player}

@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import GamesGrid from '.'
-import { MantineProvider } from '@mantine/core'
 import { mockGames } from '@/__tests__/mockData/games'
 import Providers from '@/components/Providers'
 
@@ -15,9 +14,9 @@ describe('GamesGrid component', () => {
       }))
 
     render(
-      <MantineProvider defaultColorScheme="dark">
+      <Providers>
         <GamesGrid />
-      </MantineProvider>,
+      </Providers>,
     )
 
     // Expect loader to be rendered

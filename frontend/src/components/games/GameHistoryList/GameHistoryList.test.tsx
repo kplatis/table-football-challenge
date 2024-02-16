@@ -3,13 +3,7 @@ import { render, screen } from '@testing-library/react'
 import GameHistoryList from '.'
 import { mockGames } from '@/__tests__/mockData/games'
 import { mockTeams } from '@/__tests__/mockData/teams'
-import { MantineProvider } from '@mantine/core'
-
-// Mock the useGames hook
-jest.mock('@/hooks/useGames', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}))
+import Providers from '@/components/Providers'
 
 describe('GameHistoryList Component', () => {
   const mockData = mockGames
@@ -23,9 +17,9 @@ describe('GameHistoryList Component', () => {
     require('@/hooks/useGames').default = mockUseGames
 
     render(
-      <MantineProvider defaultColorScheme="dark">
+      <Providers>
         <GameHistoryList firstTeam={mockTeams[0]} secondTeam={mockTeams[1]} />
-      </MantineProvider>,
+      </Providers>,
     )
 
     expect(screen.getByText('2 - 1')).toBeInTheDocument()
@@ -37,9 +31,9 @@ describe('GameHistoryList Component', () => {
     require('@/hooks/useGames').default = mockUseGames
 
     render(
-      <MantineProvider defaultColorScheme="dark">
+      <Providers>
         <GameHistoryList firstTeam={mockTeams[0]} secondTeam={mockTeams[1]} />
-      </MantineProvider>,
+      </Providers>,
     )
     expect(screen.queryByTestId('loader')).not.toBeInTheDocument()
     expect(screen.queryByText('2 - 1')).not.toBeInTheDocument()

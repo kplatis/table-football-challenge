@@ -18,32 +18,38 @@ export default function StatisticsDashboard() {
         <Tabs.Tab
           value={StatisticsCategory.All}
           leftSection={<IconUsersGroup style={iconStyle} />}
+          data-testid="tab-all"
         >
           All
         </Tabs.Tab>
         <Tabs.Tab
           value={StatisticsCategory.Players}
           leftSection={<IconUser style={iconStyle} />}
+          data-testid="tab-players"
         >
           Players
         </Tabs.Tab>
         <Tabs.Tab
           value={StatisticsCategory.Teams}
           leftSection={<IconUsers style={iconStyle} />}
+          data-testid="tab-teams"
         >
           Teams
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value={StatisticsCategory.All}>
+      <Tabs.Panel value={StatisticsCategory.All} data-testid="panel-all">
         <StatisticsTable category={StatisticsCategory.All} />
       </Tabs.Panel>
 
-      <Tabs.Panel value={StatisticsCategory.Players}>
+      <Tabs.Panel
+        value={StatisticsCategory.Players}
+        data-testid="panel-players"
+      >
         <StatisticsTable category={StatisticsCategory.Players} />
       </Tabs.Panel>
 
-      <Tabs.Panel value={StatisticsCategory.Teams}>
+      <Tabs.Panel value={StatisticsCategory.Teams} data-testid="panel-teams">
         <StatisticsTable category={StatisticsCategory.Teams} />
       </Tabs.Panel>
     </Tabs>

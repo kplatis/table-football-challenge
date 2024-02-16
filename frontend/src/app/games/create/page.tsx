@@ -8,6 +8,7 @@ import {
 } from '@mantine/core'
 import { IconBallFootball, IconPlayFootball } from '@tabler/icons-react'
 import classes from './page.module.css'
+import Link from 'next/link'
 
 export default function GameCreatePage() {
   return (
@@ -19,15 +20,19 @@ export default function GameCreatePage() {
         <SimpleGrid cols={2} mt="md">
           <UnstyledButton className={classes.item}>
             <IconBallFootball color="blue" size="2rem" />
-            <Text size="xs" mt={7}>
-              Already Played Game
-            </Text>
+            <Link href="/games/create/played">
+              <Text size="xs" mt={7}>
+                Already Played Game
+              </Text>
+            </Link>
           </UnstyledButton>
           <UnstyledButton className={classes.item}>
             <IconPlayFootball color="blue" size="2rem" />
-            <Text size="xs" mt={7}>
-              Live Game
-            </Text>
+            <Link href="/games/create/live">
+              <Text size="xs" mt={7}>
+                Live Game
+              </Text>
+            </Link>
           </UnstyledButton>
         </SimpleGrid>
       </Card>

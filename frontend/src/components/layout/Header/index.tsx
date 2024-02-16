@@ -14,6 +14,7 @@ const links = [
     links: [
       { link: '/teams', label: 'List teams' },
       { link: '/teams/create', label: 'Create a new team' },
+      { link: '/teams/compare', label: 'Compare Teams' },
     ],
   },
   {

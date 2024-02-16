@@ -57,7 +57,7 @@ describe('StatisticsTable', () => {
       .spyOn(require('@/hooks/useStatistics'), 'default')
       .mockImplementation(() => ({
         isLoading: false,
-        data: [],
+        data: null,
       }))
 
     render(

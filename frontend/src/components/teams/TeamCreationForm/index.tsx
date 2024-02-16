@@ -2,7 +2,6 @@
 
 import {
   Button,
-  Center,
   Group,
   Loader,
   Modal,
@@ -65,11 +64,7 @@ export default function TeamCreationForm() {
   }
 
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     const playerData = data.map((player) => ({

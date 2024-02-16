@@ -2,7 +2,6 @@
 
 import {
   Button,
-  Center,
   Group,
   Loader,
   NumberInput,
@@ -54,11 +53,7 @@ export default function PlayedGameCreationForm() {
   }
 
   if (isLoading) {
-    return (
-      <Center data-testid="loader">
-        <Loader color="blue" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     const teamsData = data.map((team) => ({

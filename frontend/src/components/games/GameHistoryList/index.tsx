@@ -12,11 +12,7 @@ export default function GameHistoryList({ firstTeam, secondTeam }: Props) {
   const { isLoading, data } = useGames(firstTeam.id, secondTeam.id)
 
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     return (

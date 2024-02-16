@@ -16,9 +16,7 @@ export default function StatisticsScore({ firstTeam, secondTeam }: Props) {
   )
   if (isLoading) {
     return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
+      <Loader />
     )
   }
   if (data) {

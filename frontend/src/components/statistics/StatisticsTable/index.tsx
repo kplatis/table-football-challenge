@@ -2,7 +2,7 @@
 
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
-import { Center, Loader, Table } from '@mantine/core'
+import { Loader, Table } from '@mantine/core'
 
 type Props = {
   category: StatisticsCategory
@@ -11,11 +11,7 @@ type Props = {
 export default function StatisticsTable({ category }: Props) {
   const { isLoading, data } = useStatistics(category)
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     const rows = data.map((statistics) => (

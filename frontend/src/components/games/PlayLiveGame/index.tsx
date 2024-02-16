@@ -4,7 +4,7 @@ import { useState } from 'react'
 import TeamSelectionForm from '../../teams/TeamSelectionForm'
 import LiveGame from './LiveGame'
 import useTeams from '@/hooks/useTeams'
-import { Center, Loader } from '@mantine/core'
+import { Loader } from '@mantine/core'
 import { FirstOrSecond, GameState } from './types'
 import { notifications } from '@mantine/notifications'
 import axios from 'axios'
@@ -89,11 +89,7 @@ export default function PlayLiveGame() {
   }
 
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     switch (step) {

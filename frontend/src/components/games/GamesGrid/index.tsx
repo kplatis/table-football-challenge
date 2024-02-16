@@ -1,7 +1,7 @@
 'use client'
 
 import useGames from '@/hooks/useGames'
-import {  SimpleGrid } from '@mantine/core'
+import { SimpleGrid } from '@mantine/core'
 import GameCard from '../GameCard'
 import Loader from '@/components/layout/Loader'
 

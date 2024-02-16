@@ -39,7 +39,7 @@ export default function TeamSelectionForm({
 
   return (
     <>
-      <form onSubmit={form.onSubmit(submit)}>
+      <form onSubmit={form.onSubmit(submit)} data-testid="team-selection-form">
         <Stack gap={'xl'}>
           <SimpleGrid cols={2}>
             <Select

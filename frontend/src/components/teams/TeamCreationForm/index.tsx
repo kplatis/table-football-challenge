@@ -1,14 +1,6 @@
 'use client'
 
-import {
-  Button,
-  Group,
-  Loader,
-  Modal,
-  Select,
-  Stack,
-  TextInput,
-} from '@mantine/core'
+import { Button, Group, Modal, Select, Stack, TextInput } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useForm } from '@mantine/form'
 import usePlayers from '@/hooks/usePlayers'
@@ -17,6 +9,7 @@ import axios from 'axios'
 import { TeamCreate } from '@/types/teams'
 import PlayerCreationForm from '@/components/players/PlayerCreationForm'
 import { useDisclosure } from '@mantine/hooks'
+import Loader from '@/components/layout/Loader'
 
 export default function TeamCreationForm() {
   const { isLoading, data, refetch } = usePlayers()

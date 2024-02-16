@@ -1,8 +1,9 @@
 'use client'
 
 import useTeams from '@/hooks/useTeams'
-import { Loader, SimpleGrid } from '@mantine/core'
+import { SimpleGrid } from '@mantine/core'
 import TeamCard from '../TeamCard'
+import Loader from '@/components/layout/Loader'
 
 export default function TeamsGrid() {
   const { isLoading, data } = useTeams()

@@ -1,19 +1,13 @@
 'use client'
 
-import {
-  Button,
-  Group,
-  Loader,
-  NumberInput,
-  Select,
-  SimpleGrid,
-} from '@mantine/core'
+import { Button, Group, NumberInput, Select, SimpleGrid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useForm } from '@mantine/form'
 import axios from 'axios'
 import useTeams from '@/hooks/useTeams'
 import { validateFirstTeam, validateSecondTeam } from './validation'
 import { GameCreationSchema } from '@/types/games'
+import Loader from '@/components/layout/Loader'
 
 export default function PlayedGameCreationForm() {
   const { isLoading, data } = useTeams()

@@ -1,8 +1,9 @@
 'use client'
 
+import Loader from '@/components/layout/Loader'
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
-import { Loader, Table } from '@mantine/core'
+import { Table } from '@mantine/core'
 
 type Props = {
   category: StatisticsCategory

@@ -1,6 +1,6 @@
 import { Player } from '@/types/players'
 
-export const mockPlayer: Player[] = [
+export const mockPlayers: Player[] = [
   {
     name: 'Player1',
     id: 1,

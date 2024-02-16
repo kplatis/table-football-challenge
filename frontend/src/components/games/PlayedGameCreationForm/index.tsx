@@ -1,20 +1,13 @@
 'use client'
 
-import {
-  Button,
-  Center,
-  Group,
-  Loader,
-  NumberInput,
-  Select,
-  SimpleGrid,
-} from '@mantine/core'
+import { Button, Group, NumberInput, Select, SimpleGrid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useForm } from '@mantine/form'
 import axios from 'axios'
 import useTeams from '@/hooks/useTeams'
 import { validateFirstTeam, validateSecondTeam } from './validation'
 import { GameCreationSchema } from '@/types/games'
+import Loader from '@/components/layout/Loader'
 
 export default function PlayedGameCreationForm() {
   const { isLoading, data } = useTeams()
@@ -54,11 +47,7 @@ export default function PlayedGameCreationForm() {
   }
 
   if (isLoading) {
-    return (
-      <Center data-testid="loader">
-        <Loader color="blue" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     const teamsData = data.map((team) => ({

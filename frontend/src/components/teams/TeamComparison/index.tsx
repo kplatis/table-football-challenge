@@ -4,9 +4,10 @@ import { Team } from '@/types/teams'
 import TeamSelectionForm from '../TeamSelectionForm'
 import { useState } from 'react'
 import useTeams from '@/hooks/useTeams'
-import { Center, Loader, Title } from '@mantine/core'
+import { Title } from '@mantine/core'
 import StatisticsScore from '@/components/statistics/StatisticsScore'
 import GameHistoryList from '@/components/games/GameHistoryList'
+import Loader from '@/components/layout/Loader'
 
 type TeamSelectioState = {
   firstTeam?: Team
@@ -31,11 +32,7 @@ export default function TeamComparison() {
   }
 
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     return (

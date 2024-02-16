@@ -1,18 +1,15 @@
 'use client'
 
 import useGames from '@/hooks/useGames'
-import { Center, Loader, SimpleGrid } from '@mantine/core'
+import { SimpleGrid } from '@mantine/core'
 import GameCard from '../GameCard'
+import Loader from '@/components/layout/Loader'
 
 export default function GamesGrid() {
   const { isLoading, data } = useGames()
 
   if (isLoading) {
-    return (
-      <Center data-testid="loader">
-        <Loader color="blue" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     return (

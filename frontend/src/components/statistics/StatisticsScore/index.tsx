@@ -1,7 +1,8 @@
+import Loader from '@/components/layout/Loader'
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
 import { Team } from '@/types/teams'
-import { Center, Loader, Text } from '@mantine/core'
+import { Center, Text } from '@mantine/core'
 
 type Props = {
   firstTeam: Team
@@ -15,11 +16,7 @@ export default function StatisticsScore({ firstTeam, secondTeam }: Props) {
     secondTeam.id,
   )
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="blue" data-testid="loader" />
-      </Center>
-    )
+    return <Loader />
   }
   if (data) {
     // TODO: add id in stats

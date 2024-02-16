@@ -12,7 +12,6 @@ describe('TeamCard', () => {
     render(
       <Providers>
         <TeamCard
-          id={1}
           name="team1"
           firstPlayer={mockPlayers[0]}
           secondPlayer={mockPlayers[1]}

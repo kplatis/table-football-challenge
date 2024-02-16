@@ -16,7 +16,6 @@ export default function TeamsGrid() {
         {data.map((team) => (
           <TeamCard
             key={team.id}
-            id={team.id}
             name={team.name}
             firstPlayer={team.first_player}
             secondPlayer={team.second_player}

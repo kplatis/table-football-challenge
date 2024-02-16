@@ -1,5 +1,6 @@
 'use client'
 
+import MessageWithButton from '@/components/common/MessageWithButton'
 import Loader from '@/components/layout/Loader'
 import useStatistics from '@/hooks/useStatistics'
 import { StatisticsCategory } from '@/types/statistics'
@@ -14,6 +15,16 @@ export default function StatisticsTable({ category }: Props) {
   if (isLoading) {
     return <Loader />
   }
+  if (data && data.length == 0) {
+    return (
+      <MessageWithButton
+        message="There are no games created yet"
+        buttonMessage="Create a new game"
+        buttonUrl="/games/create"
+      />
+    )
+  }
+
   if (data) {
     const rows = data.map((statistics) => (
       <Table.Tr key={statistics.name}>

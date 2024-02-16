@@ -12,7 +12,7 @@ describe('Header', () => {
     )
 
     // Check if logo is rendered
-    expect(screen.getByText('Challenge')).toBeInTheDocument()
+    expect(screen.getByText('Table Football Challenge')).toBeInTheDocument()
 
     // Check if menu items are rendered
     expect(screen.getByText('Dashboard')).toBeInTheDocument()

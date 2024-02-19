@@ -14,7 +14,11 @@ export function HeroPage() {
         opacity={1}
         zIndex={0}
       />
-      <Container className={classes.container} size="md" h={'100vh'}>
+      <Container
+        className={classes.container}
+        size="md"
+        h={'calc(100vh - 76px)'}
+      >
         <Title className={classes.title}>Table football challenge</Title>
         <Text className={classes.description} size="xl" mt="xl">
           Organize Players, Form Teams, Record Matches, and Keep Score with

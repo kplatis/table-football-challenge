@@ -1,6 +1,6 @@
 'use client'
 
-import { Menu, Group, Center, Burger } from '@mantine/core'
+import { Menu, Group, Center, Burger, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import classes from './Header.module.css'
 import Link from 'next/link'
@@ -68,7 +68,9 @@ export function Header() {
   return (
     <header className={classes.header}>
       <div className={classes.inner}>
-        <div>Table Football Challenge</div>
+        <Link href="/" className={classes.link}>
+          <Title order={4}>Table Football Challenge</Title>
+        </Link>
         <Group gap={10} visibleFrom="sm">
           {items}
         </Group>

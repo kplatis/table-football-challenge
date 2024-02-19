@@ -8,7 +8,7 @@ export function validateFirstPlayer(
   values: TeamCreationDataPreValidation,
 ) {
   // if first player value is not set
-  if (value === undefined) {
+  if (value === null) {
     return 'First player is required'
   }
   // if selected same first and second player

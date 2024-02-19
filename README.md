@@ -25,6 +25,6 @@ $ docker-compose up --build
 
 This command will build the Docker images for both services and start the containers.
 
-Note: In certain Intel Mac machines, the frontend [container throws `Segmentation fault` error](https://github.com/docker/for-mac/issues/6824). In that case disable the `Use Virtualization framework` option in the docker engine settings and re-build the containers. 
+> **Note:** In certain Intel Mac machines, the frontend [container throws `Segmentation fault` error](https://github.com/docker/for-mac/issues/6824). In that case disable the `Use Virtualization framework` option in the docker engine settings and re-build the containers. 
 
 3. Access the backend application at `http://localhost:8000` and the frontend application at `http://localhost:3000` in your web browser. The OpenAPI documentation of the backend can be found in `http://localhost:8000/docs`
